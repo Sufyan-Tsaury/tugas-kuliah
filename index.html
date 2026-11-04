@@ -549,30 +549,25 @@
         </div>
 
         <!-- PROYEK 4: WebGIS & Demografi -->
-        <div class="project-card bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <div>
-            <img
-                src="aset/foto-webgis.jpg"
-                alt="Katalog WebGIS"
-                width="1915"
-                height="1000"
-                loading="lazy"
-                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
-              />
-            <!-- WADAH FOTO PROYEK: ganti dengan <img src="aset/foto-webgis.jpg" alt="Katalog WebGIS" loading="lazy" class="w-full h-full object-cover" /> -->
-            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
-              <div class="text-center p-3">
-                <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
-                  <i data-lucide="map" class="w-5 h-5"></i>
-                </div>
-                <span class="text-xs font-bold text-neutral-700 block">Katalog WebGIS</span>
-              </div>
-              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950 text-white px-2.5 py-0.5 rounded-md">
-                WebGIS
-              </span>
-            </div>
+        <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
+  <div>
+    <!-- Wadah tetap terkunci di rasio 16:9 -->
+    <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+      <img
+        src="aset/foto-webgis.jpg"
+        alt="Katalog WebGIS"
+        width="1920"
+        height="1080"
+        loading="lazy"
+        class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+      />
+      <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
+        WebGIS
+      </span>
+    </div>
 
-            <div class="p-4 space-y-1.5">
+    <div class="p-4 space-y-1.5">
+      <!-- judul & deskripsi tetap sama -->
               <div class="flex items-center justify-between">
                 <a href="webgis.html" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 flex items-center gap-1 transition-colors">
                   <span>Katalog WebGIS</span>
