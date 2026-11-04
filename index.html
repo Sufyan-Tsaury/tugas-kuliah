@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio Sufyan Tsaury — Web Development (Next.js, React, Supabase), WebGIS & Pemetaan Spasial, Pembuatan Buku Ajar & Naskah Akademik." />
+  <meta name="description" content="Portofolio Sufyan Tsaury — Web Developer & Digital Specialist. Next.js, React, Supabase, PWA, WebGIS, dan Naskah Akademik." />
   <meta name="author" content="Sufyan Tsaury" />
   <title>Sufyan Tsaury — Web Developer & Digital Specialist</title>
   
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Font: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,28 +24,7 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-          colors: {
-            primary: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            }
-          },
-          animation: {
-            'float': 'float 4s ease-in-out infinite',
-            'float-delayed': 'float 4.5s ease-in-out 2s infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
-            }
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
@@ -53,861 +32,791 @@
   </script>
 
   <style>
-    * {
-      transition-property: color, background-color, border-color, opacity, box-shadow, transform;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 200ms;
+    ::selection {
+      background-color: #09090b;
+      color: #ffffff;
     }
-    .card-hover:hover {
-      transform: translateY(-4px);
+
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    img { max-width: 100%; }
+    h1, h2, h3, h4, p, li { overflow-wrap: anywhere; }
+    [hidden] { display: none !important; }
+
+    /* Brand Pill Skill (Monokrom Bersih + Logo Aplikasi Asli) */
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background-color: #ffffff;
+      border: 1px solid #e5e5e5;
+      color: #171717;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+      transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
     }
-    /* State aktif saat kartu diklik dengan aksen warna masing-masing */
-    .stat-card.active-blue {
-      border-color: #2563eb !important;
-      box-shadow: 0 12px 25px -5px rgba(37, 99, 235, 0.2) !important;
+    .brand-pill:hover {
+      background-color: #f5f5f5;
+      border-color: #a3a3a3;
+      color: #09090b;
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.06);
     }
-    .stat-card.active-emerald {
-      border-color: #059669 !important;
-      box-shadow: 0 12px 25px -5px rgba(5, 150, 105, 0.2) !important;
+
+    /* Dock aman untuk HP dengan notch / gesture bar */
+    .dock-safe { bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+
+    /* Timeline Garis Vertikal */
+    .timeline-item { position: relative; }
+    .timeline-dot::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 42px;
+      bottom: -18px;
+      width: 1.5px;
+      background-color: #e5e5e5;
     }
-    .stat-card.active-violet {
-      border-color: #7c3aed !important;
-      box-shadow: 0 12px 25px -5px rgba(124, 58, 237, 0.2) !important;
+    .timeline-item:last-child .timeline-dot::after {
+      display: none;
     }
-    .stat-card.active-amber {
-      border-color: #d97706 !important;
-      box-shadow: 0 12px 25px -5px rgba(217, 119, 6, 0.2) !important;
+
+    /* Kartu Proyek Kompak Monokrom */
+    .project-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: #a3a3a3;
+      box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.07), 0 6px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Wadah Foto Mockup Monokrom */
+    .photo-slot {
+      background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
+    }
+
+    /* Native Dialog Backdrop */
+    dialog#awardModal::backdrop {
+      background-color: rgba(9, 9, 11, 0.72);
+      backdrop-filter: blur(4px);
+    }
+    dialog#awardModal[open] {
+      animation: dialogFadeIn 0.18s ease-out;
+    }
+    @keyframes dialogFadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Hormati preferensi pengguna yang mematikan animasi */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
-<body class="bg-white text-slate-800 font-sans antialiased selection:bg-primary-600 selection:text-white">
+<body class="bg-[#fafafa] text-neutral-900 font-sans antialiased min-h-screen py-10 sm:py-14 lg:py-20 px-4 sm:px-8 relative pb-32 overflow-x-hidden">
 
-  <!-- ==================== NAVBAR ==================== -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      
-      <!-- Brand Logo -->
-      <a href="#beranda" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white font-extrabold text-base shadow-md shadow-primary-600/20 group-hover:scale-105 transition-transform">
-          ST
-        </div>
-        <div>
-          <span class="text-lg font-extrabold tracking-tight text-slate-900 block leading-tight">
-            Sufyan Tsaury<span class="text-primary-600">.</span>
-          </span>
-          <span class="text-[11px] font-semibold text-slate-500 block">
-            Web Developer & Digital Specialist
-          </span>
-        </div>
-      </a>
+  <!-- ==================== KANVAS TITIK-TITIK BERGERAK MONOKROM DI ATAS ==================== -->
+  <div class="absolute inset-x-0 top-0 h-[440px] overflow-hidden pointer-events-none z-0">
+    <canvas id="heroDotsCanvas" class="w-full h-full opacity-75"></canvas>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#fafafa]"></div>
+  </div>
 
-      <!-- Menu Desktop -->
-      <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-600">
-        <a href="#beranda" class="hover:text-primary-600">Beranda</a>
-        <a href="#tentang" class="hover:text-primary-600">Tentang</a>
-        <a href="#statistik" class="hover:text-primary-600">Statistik</a>
-        <a href="#portofolio" class="hover:text-primary-600">Proyek Web</a>
-        <a href="#layanan" class="hover:text-primary-600">Layanan</a>
-        <a href="#alur" class="hover:text-primary-600">Alur Kerja</a>
-        <a href="#kontak" class="hover:text-primary-600">Kontak</a>
-      </nav>
+  <!-- WRAPPER UTAMA -->
+  <main class="w-full max-w-2xl lg:max-w-3xl mx-auto space-y-10 sm:space-y-12 lg:space-y-14 relative z-10">
 
-      <!-- Action Button -->
-      <div class="hidden sm:flex items-center gap-3">
-        <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold shadow-sm transition-all hover:shadow-md hover:shadow-primary-600/25 flex items-center gap-2">
-          <i data-lucide="send" class="w-4 h-4"></i>
-          <span>Konsultasi Proyek</span>
-        </a>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100" aria-label="Toggle Menu">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
-    </div>
-
-    <!-- Dropdown Mobile Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-100 px-6 py-5 flex flex-col gap-4 font-semibold text-slate-700 shadow-xl">
-      <a href="#beranda" class="hover:text-primary-600">Beranda</a>
-      <a href="#tentang" class="hover:text-primary-600">Tentang Saya</a>
-      <a href="#statistik" class="hover:text-primary-600">Statistik</a>
-      <a href="#portofolio" class="hover:text-primary-600">Proyek Web & Karya</a>
-      <a href="#layanan" class="hover:text-primary-600">Layanan</a>
-      <a href="#alur" class="hover:text-primary-600">Alur Kerja</a>
-      <a href="#kontak" class="hover:text-primary-600">Hubungi Saya</a>
-      <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
-        <a href="https://t.me/piantsa" target="_blank" class="w-full text-center py-2.5 rounded-full bg-primary-600 text-white font-bold text-sm">
-          Chat via Telegram (@piantsa)
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="pt-24">
-    <!-- ==================== HERO SECTION (FOKUS WEB DEVELOPMENT) ==================== -->
-    <section id="beranda" class="min-h-[85vh] flex items-center py-12 md:py-20">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-12 items-center">
-        
-        <!-- Sisi Kiri: Headline Fokus Pembuatan Web & Solusi Digital -->
-        <div class="md:col-span-7 space-y-6 text-left">
-          <!-- Badge Pill Status -->
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-primary-700 text-xs font-bold uppercase tracking-wider">
-            <span class="w-2.5 h-2.5 rounded-full bg-primary-600 animate-pulse"></span>
-            Web Developer & Digital Project
-          </div>
-
-          <!-- Headline Utama -->
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
-            Membangun solusi <span class="text-primary-600">web modern,</span> sistem informasi & karya akademik.
+    <!-- ================= 1. HERO HEADER (TANPA BADGE JUARA DI ATAS) ================= -->
+    <header class="pt-1">
+      <div class="flex items-start justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 flex-1 min-w-0">
+          <h1 class="text-2xl min-[400px]:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950 leading-tight">
+            Hi, I'm Sufyan
           </h1>
-
-          <!-- Deskripsi Ringkas -->
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
-            Pembuatan aplikasi web (Next.js & Supabase), pemetaan digital WebGIS interaktif, serta didukung pembuatan dan penyusunan naskah akademik.
+          <p class="text-sm min-[400px]:text-base sm:text-lg lg:text-xl text-neutral-600 font-medium leading-snug">
+            Web Developer & Digital Specialist based in Sumedang, Indonesia.
           </p>
-
-          <!-- Tombol CTA -->
-          <div class="flex flex-wrap items-center gap-4 pt-2">
-            <a href="#portofolio" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm shadow-lg shadow-primary-600/25 transition-all hover:scale-[1.02]">
-              <span>Lihat Proyek Web</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-
-            <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm shadow-sm transition-all hover:scale-[1.02]">
-              <i data-lucide="send" class="w-4 h-4 text-primary-600"></i>
-              <span>Diskusi Proyek di Telegram</span>
-            </a>
-          </div>
-
-          <!-- Jalur Komunikasi Ringkas -->
-          <div class="flex flex-wrap items-center gap-4 pt-4 text-slate-400 text-xs font-semibold">
-            <span class="uppercase tracking-wider text-slate-500">Akses Cepat:</span>
-            <a href="https://kelas-hk-a-uinssc-2025.vercel.app" target="_blank" class="hover:text-primary-600 flex items-center gap-1.5 transition-colors bg-slate-50 hover:bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700">
-              <i data-lucide="globe" class="w-3.5 h-3.5 text-primary-600"></i>
-              <span>Live Web Kelas (HK A)</span>
-            </a>
-            <a href="https://i-love-qyu.vercel.app" target="_blank" class="hover:text-indigo-600 flex items-center gap-1.5 transition-colors bg-indigo-50/70 hover:bg-indigo-100/80 px-3 py-1.5 rounded-lg border border-indigo-200 text-indigo-700 font-bold">
-              <i data-lucide="file-text" class="w-3.5 h-3.5 text-indigo-600"></i>
-              <span>iLoveQyu (PWA WebApp)</span>
-            </a>
-            <button onclick="copyEmail()" class="hover:text-primary-600 flex items-center gap-1.5 transition-colors bg-slate-50 hover:bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700">
-              <i data-lucide="mail" class="w-3.5 h-3.5 text-primary-600"></i>
-              <span id="quickCopyEmailText">sufyantsaury.id@gmail.com</span>
-            </button>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1 text-xs text-neutral-500 font-medium">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-neutral-500"></i> Sumedang & Remote
+            </span>
+            <span class="hidden sm:inline text-neutral-300">•</span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-neutral-500"></i> UIN SSC & SMKN 7 Garut
+            </span>
           </div>
         </div>
 
-        <!-- Sisi Kanan: Foto Bersih dengan 2 Floating Badge (Fokus Web & Spasial) -->
-        <div class="md:col-span-5 relative flex justify-center">
-          <div class="relative w-full max-w-sm">
-            
-            <!-- Foto Utama Bersih -->
-            <div class="w-full aspect-[4/4.8] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
-              <img 
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" 
-                alt="Pengembangan Web & Karya Digital" 
-                class="w-full h-full object-cover"
-              />
-            </div>
-
-            <!-- Floating Badge 1 (Kiri Atas - Fokus Web Project) -->
-            <div class="absolute -top-4 -left-4 sm:-left-6 bg-white p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-float">
-              <div class="w-10 h-10 rounded-full bg-blue-50 text-primary-600 flex items-center justify-center flex-shrink-0">
-                <i data-lucide="code-2" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs font-extrabold text-slate-900">Modern Web App</p>
-                <p class="text-[11px] text-slate-500 font-medium">Next.js, React & Supabase</p>
-              </div>
-            </div>
-
-            <!-- Floating Badge 2 (Kanan Bawah - WebGIS) -->
-            <div class="absolute -bottom-5 -right-4 sm:-right-6 bg-white p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-float-delayed">
-              <div class="w-10 h-10 rounded-full bg-blue-50 text-primary-600 flex items-center justify-center flex-shrink-0">
-                <i data-lucide="map" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs font-extrabold text-slate-900">WebGIS & Digital Map</p>
-                <p class="text-[11px] text-slate-500 font-medium">Leaflet.js & Spasial Interaktif</p>
-              </div>
-            </div>
-
-          </div>
+        <!-- Avatar Profil Bulat (Simpan foto Anda di assets/foto-profil.jpg) -->
+        <div class="relative w-16 h-16 min-[400px]:w-20 min-[400px]:h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-white shadow-md bg-neutral-950 flex items-center justify-center flex-shrink-0">
+          <img 
+            src="assets/foto-profil.jpg" 
+            alt="Foto profil Sufyan Tsaury" 
+            fetchpriority="high"
+            width="112"
+            height="112"
+            onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+            class="w-full h-full object-cover object-top"
+          />
+          <span hidden aria-hidden="true" class="text-white font-extrabold text-lg sm:text-2xl tracking-tight select-none">ST</span>
         </div>
-
       </div>
+    </header>
+
+    <!-- ================= 2. ABOUT (DESKRIPSI UMUM) ================= -->
+    <section id="about" class="space-y-3">
+      <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">About</h2>
+      <p class="text-neutral-600 text-sm sm:text-base leading-relaxed text-pretty">
+        Menggabungkan latar belakang teknis jaringan dan pengembangan aplikasi web modern (Next.js, React, Supabase) dengan ketelitian penyusunan naskah akademik. Fokus membangun sistem informasi web terintegrasi, aplikasi utilitas berbasis PWA yang cepat dan aman di sisi klien, pemetaan digital WebGIS interaktif, serta penataan dokumen dan buku ajar terstruktur.
+      </p>
     </section>
 
+    <!-- ================= 3. WORK EXPERIENCE ================= -->
+    <section id="experience" class="space-y-5">
+      <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Work Experience</h2>
 
-    <!-- ==================== HALAMAN 2: MENGENAL SUFYAN TSAURY ==================== -->
-    <section id="tentang" class="py-20 bg-slate-50/70 border-t border-slate-100">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="space-y-6">
         
-        <div class="max-w-2xl mx-auto text-center space-y-3 mb-16">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary-600 bg-blue-50 px-4 py-1 rounded-full border border-blue-100">Profil Singkat</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Mengenal Sufyan Tsaury</h2>
-          <p class="text-slate-600 text-sm sm:text-base">
-            Menggabungkan keahlian koding aplikasi web dengan ketelitian metodologis penyusunan naskah.
-          </p>
+        <!-- Experience 1 -->
+        <div class="relative flex gap-4 timeline-item">
+          <div class="timeline-dot w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center flex-shrink-0 text-neutral-700 shadow-xs mt-0.5 z-10">
+            <i data-lucide="code-2" class="w-4 h-4"></i>
+          </div>
+          <div class="flex-1 space-y-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
+              <h3 class="font-bold text-sm text-neutral-900">Freelance Web Developer</h3>
+              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2024 - Present</span>
+            </div>
+            <p class="text-xs text-neutral-500 font-medium">Fullstack Web & Client-Side Solutions · Remote</p>
+            <ul class="text-xs text-neutral-600 list-disc list-outside pl-4 space-y-1.5 pt-1.5 leading-relaxed">
+              <li>Merancang dan mendeploy aplikasi web modern berkinerja tinggi menggunakan Next.js 15, React 19, Supabase, dan Tailwind CSS.</li>
+              <li>Membangun Progressive Web App (PWA) <strong>iLoveQyu</strong> dengan arsitektur <em>100% Client-Side</em> tanpa server pihak ketiga.</li>
+              <li>Mengembangkan portal peta digital WebGIS interaktif berbasis Leaflet.js dan format GeoJSON demografi spasial.</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="grid md:grid-cols-12 gap-8 items-start">
-          
-          <!-- Cerita Singkat (Kiri) -->
-          <div class="md:col-span-7 bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
-            <h3 class="text-xl font-bold text-slate-900">Teknologi Web yang Fungsional & Kerapian Struktur</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">
-              Dengan latar belakang pendidikan Teknik Komputer dan Jaringan (TKJ) serta studi di bidang ilmu hukum, saya memiliki pendekatan yang sistematis: mampu merancang sistem web modern yang cepat dan fungsional, sekaligus menjaga ketelitian logika dan kerapian tata letak dokumen akademik.
-            </p>
-            <p class="text-slate-600 text-sm leading-relaxed">
-              Saya berpengalaman mengembangkan portal web kelas (Next.js & Supabase), aplikasi web utilitas dokumen berbasis PWA (iLoveQyu), membuat peta interaktif WebGIS dengan Leaflet, hingga menyusun dokumen buku ajar dan modul akademik siap terbit.
-            </p>
-            <div class="pt-4 border-t border-slate-200 flex items-center gap-3">
-              <span class="text-xs font-bold text-primary-600 bg-blue-50 px-3 py-1 rounded-full">Prinsip:</span>
-              <span class="text-xs text-slate-600 font-medium">"Koding yang bersih, performa cepat, dan naskah terstruktur rapi."</span>
-            </div>
+        <!-- Experience 2 -->
+        <div class="relative flex gap-4 timeline-item">
+          <div class="timeline-dot w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center flex-shrink-0 text-neutral-700 shadow-xs mt-0.5 z-10">
+            <i data-lucide="globe" class="w-4 h-4"></i>
           </div>
-
-          <!-- Biodata Terstruktur (Kanan) -->
-          <div class="md:col-span-5 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-3">
-            <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Informasi Personal</h4>
-
-            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-              <span class="text-slate-500 font-medium flex items-center gap-2">
-                <i data-lucide="graduation-cap" class="w-4 h-4 text-primary-600"></i> Status Akademik
-              </span>
-              <span class="font-bold text-slate-800 text-right">S1 Hukum Keluarga (UIN SSC)</span>
+          <div class="flex-1 space-y-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
+              <h3 class="font-bold text-sm text-neutral-900">Web Administrator & Lead Developer</h3>
+              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2025 - Present</span>
             </div>
-
-            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-              <span class="text-slate-500 font-medium flex items-center gap-2">
-                <i data-lucide="network" class="w-4 h-4 text-primary-600"></i> Background
-              </span>
-              <span class="font-bold text-slate-800">TKJ SMKN 7 Garut (2025)</span>
-            </div>
-
-            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-              <span class="text-slate-500 font-medium flex items-center gap-2">
-                <i data-lucide="map-pin" class="w-4 h-4 text-primary-600"></i> Domisili
-              </span>
-              <span class="font-bold text-slate-800">Sumedang, Jawa Barat</span>
-            </div>
-
-            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-              <span class="text-slate-500 font-medium flex items-center gap-2">
-                <i data-lucide="calendar" class="w-4 h-4 text-primary-600"></i> Usia
-              </span>
-              <span class="font-bold text-slate-800">20 Tahun</span>
-            </div>
-
-            <div class="pt-2 flex gap-2">
-              <a href="mailto:sufyantsaury.id@gmail.com" class="flex-1 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 border border-slate-200">
-                <i data-lucide="mail" class="w-3.5 h-3.5"></i> Email
-              </a>
-              <a href="https://t.me/piantsa" target="_blank" class="flex-1 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
-                <i data-lucide="send" class="w-3.5 h-3.5"></i> Telegram
-              </a>
-            </div>
+            <p class="text-xs text-neutral-500 font-medium">Portal Kelas HK A UIN Siber Syekh Nurjati Cirebon</p>
+            <ul class="text-xs text-neutral-600 list-disc list-outside pl-4 space-y-1.5 pt-1.5 leading-relaxed">
+              <li>Membangun portal informasi perkuliahan terpusat dengan fitur presensi digital realtime dan jadwal kuliah dinamis.</li>
+              <li>Mengelola repositori berkas dan materi perkuliahan 11 mata kuliah dengan integrasi Supabase Database.</li>
+            </ul>
           </div>
-
         </div>
+
+        <!-- Experience 3 -->
+        <div class="relative flex gap-4 timeline-item">
+          <div class="timeline-dot w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center flex-shrink-0 text-neutral-700 shadow-xs mt-0.5 z-10">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+          </div>
+          <div class="flex-1 space-y-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
+              <h3 class="font-bold text-sm text-neutral-900">Academic Typesetting & Naskah Specialist</h3>
+              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2024 - Present</span>
+            </div>
+            <p class="text-xs text-neutral-500 font-medium">Penyusunan Modul, Buku Ajar & Format Ilmiah</p>
+            <ul class="text-xs text-neutral-600 list-disc list-outside pl-4 space-y-1.5 pt-1.5 leading-relaxed">
+              <li>Penyusunan dan perapian naskah buku ajar terstruktur (Buku Manajemen Pendidikan) siap cetak dan siap ajar.</li>
+              <li>Penataan dokumen formal akademik, sitasi, dan daftar isi otomatis sesuai gaya selingkung perguruan tinggi.</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </section>
 
+    <!-- ================= 4. EDUCATION (LOGO BULAT PROPORSIONAL) ================= -->
+    <section id="education" class="space-y-4">
+      <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Education</h2>
 
-    <!-- ==================== HALAMAN 3: STATISTIK PROYEK & STANDAR KERJA ==================== -->
-    <section id="statistik" class="py-20 bg-white border-t border-slate-100">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="space-y-3.5">
         
-        <div class="max-w-2xl mx-auto text-center space-y-3 mb-12">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary-600 bg-blue-50 px-4 py-1 rounded-full border border-blue-100">
-            Data & Rekam Jejak
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Statistik Proyek & Standar Kerja
-          </h2>
-          <p class="text-slate-600 text-sm sm:text-base">
-            Metrik pengerjaan proyek web, kepatuhan struktur dokumen, serta dedikasi komunikasi cepat.
-          </p>
+        <!-- Edu 1: UIN SSC -->
+        <div class="flex gap-4 items-center p-3 rounded-2xl bg-white border border-neutral-200/90 hover:border-neutral-400 transition-colors">
+          <div class="w-14 h-14 rounded-full bg-white border border-neutral-200 flex-shrink-0 shadow-2xs overflow-hidden">
+            <img src="assets/logo-uinssc-round.png" alt="Logo UIN Siber Syekh Nurjati Cirebon" loading="lazy" width="56" height="56" class="w-full h-full object-cover" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
+              <h3 class="font-bold text-sm text-neutral-900">UIN Siber Syekh Nurjati Cirebon</h3>
+              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2025 - Present</span>
+            </div>
+            <p class="text-xs text-neutral-500 font-medium">S1 Hukum Keluarga (Ahwal Syakhshiyyah)</p>
+          </div>
         </div>
 
-        <!-- 4 Kartu Statistik dengan warna berbeda (Biru, Emerald, Violet, Amber) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <!-- Card 1 (Biru / Proyek Web) -->
-          <div class="stat-card bg-white rounded-3xl p-7 text-center border border-slate-200/80 shadow-sm card-hover hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer flex flex-col items-center justify-center group" data-color="blue" onclick="selectStatCard(this)">
-            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all">
-              <i data-lucide="code-2" class="w-7 h-7"></i>
-            </div>
-            <div class="flex items-baseline justify-center mb-2">
-              <span class="stat-counter text-4xl sm:text-5xl font-extrabold text-blue-600" data-target="5">0</span>
-              <span class="text-3xl font-extrabold text-blue-600">+</span>
-            </div>
-            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Proyek Web & Digital
-            </p>
+        <!-- Edu 2: SMKN 7 Garut -->
+        <div class="flex gap-4 items-center p-3 rounded-2xl bg-white border border-neutral-200/90 hover:border-neutral-400 transition-colors">
+          <div class="w-14 h-14 rounded-full bg-white border border-neutral-200 flex-shrink-0 shadow-2xs overflow-hidden">
+            <img src="assets/logo-smkn7garut-round.png" alt="Logo SMKN 7 Garut" loading="lazy" width="56" height="56" class="w-full h-full object-cover" />
           </div>
-
-          <!-- Card 2 (Emerald / Kualitas & Format) -->
-          <div class="stat-card bg-white rounded-3xl p-7 text-center border border-slate-200/80 shadow-sm card-hover hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 cursor-pointer flex flex-col items-center justify-center group" data-color="emerald" onclick="selectStatCard(this)">
-            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-              <i data-lucide="check-circle-2" class="w-7 h-7"></i>
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
+              <h3 class="font-bold text-sm text-neutral-900">SMK Negeri 7 Garut</h3>
+              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2022 - 2025</span>
             </div>
-            <div class="flex items-baseline justify-center mb-2">
-              <span class="stat-counter text-4xl sm:text-5xl font-extrabold text-emerald-600" data-target="100">0</span>
-              <span class="text-3xl font-extrabold text-emerald-600">%</span>
-            </div>
-            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Ketepatan Format & Kualitas
-            </p>
+            <p class="text-xs text-neutral-500 font-medium">Teknik Komputer dan Jaringan (TKJ)</p>
           </div>
-
-          <!-- Card 3 (Violet / Standar Modern) -->
-          <div class="stat-card bg-white rounded-3xl p-7 text-center border border-slate-200/80 shadow-sm card-hover hover:border-violet-500 hover:shadow-lg hover:shadow-violet-500/10 cursor-pointer flex flex-col items-center justify-center group" data-color="violet" onclick="selectStatCard(this)">
-            <div class="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all">
-              <i data-lucide="layers" class="w-7 h-7"></i>
-            </div>
-            <div class="flex items-baseline justify-center mb-2">
-              <span class="stat-counter text-4xl sm:text-5xl font-extrabold text-violet-600" data-target="2026" data-raw="true">0</span>
-            </div>
-            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Standar Web Modern
-            </p>
-          </div>
-
-          <!-- Card 4 (Amber / Komunikasi Responsif) -->
-          <div class="stat-card bg-white rounded-3xl p-7 text-center border border-slate-200/80 shadow-sm card-hover hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 cursor-pointer flex flex-col items-center justify-center group" data-color="amber" onclick="selectStatCard(this)">
-            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all">
-              <i data-lucide="message-square" class="w-7 h-7"></i>
-            </div>
-            <div class="flex items-baseline justify-center mb-2">
-              <span class="stat-counter text-4xl sm:text-5xl font-extrabold text-amber-600" data-target="24">0</span>
-              <span class="text-3xl font-extrabold text-amber-600">/7</span>
-            </div>
-            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Komunikasi Responsif
-            </p>
-          </div>
-
         </div>
+
       </div>
     </section>
 
-
-    <!-- ==================== HALAMAN 4: PORTOFOLIO PROYEK UTAMA (WEB & DIGITAL) ==================== -->
-    <section id="portofolio" class="py-20 bg-slate-50/70 border-t border-slate-100">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- ================= 5. SKILLS (LOGO ASLI APLIKASI) ================= -->
+    <section id="skills" class="space-y-3">
+      <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Skills</h2>
+      
+      <div class="flex flex-wrap gap-2">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div class="space-y-3">
-            <span class="text-xs font-bold uppercase tracking-wider text-primary-600 bg-blue-50 px-4 py-1 rounded-full border border-blue-100">Showcase Proyek</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Koleksi Proyek Web & Karya</h2>
-            <p class="text-slate-600 text-sm sm:text-base">Pengembangan aplikasi web terintegrasi, visualisasi geospasial, serta penyusunan buku ajar.</p>
-          </div>
-    
-          
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-          
-          <!-- Proyek 1: Web Kelas HK A 2025 (HIGHLIGHT UTAMA) -->
-          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between p-7">
-            <div class="space-y-4">
-              <div class="flex flex-wrap gap-2">
-                <span class="text-xs font-bold bg-blue-50 text-primary-700 border border-blue-200 px-3 py-1 rounded-full flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-primary-600 animate-pulse"></span> Live Production
-                </span>
-                <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">Next.js 15 & Supabase</span>
-              </div>
-              <h3 class="text-2xl font-bold text-slate-900">Portal Sistem Informasi Web Kelas</h3>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Platform web sistem informasi akademik dan repositori perkuliahan terpadu untuk mahasiswa Hukum Keluarga A 2025 UIN Siber Syekh Nurjati Cirebon. Dilengkapi presensi digital realtime, manajemen jadwal kuliah, dan repositori berkas 11 mata kuliah.
-              </p>
-              <div class="grid grid-cols-2 gap-2 text-xs text-slate-500 pt-2">
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Presensi Realtime</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Repositori 11 Matkul</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Jadwal Kuliah Dinamis</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Deploy di Vercel</span>
-              </div>
-            </div>
-            <div class="pt-6 mt-6 border-t border-slate-100">
-              <a href="https://kelas-hk-a-uinssc-2025.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm transition-all shadow-md shadow-primary-600/20">
-                <span>Kunjungi Website Kelas</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Proyek 2: WebApp iLoveQyu — Privacy-First PDF Utility & PWA (WEB PROJECT) -->
-          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm card-hover hover:border-indigo-600 flex flex-col justify-between p-7">
-            <div class="space-y-4">
-              <div class="flex flex-wrap gap-2">
-                <span class="text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1 rounded-full flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Live PWA WebApp
-                </span>
-                <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">React 19, TS & Vite</span>
-                <span class="text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> 100% Client-Side
-                </span>
-              </div>
-              <h3 class="text-2xl font-bold text-slate-900">iLoveQyu — Privacy-First PDF Utility & PWA</h3>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Aplikasi web utilitas PDF modern berbasis Progressive Web App (PWA) dengan arsitektur 100% Client-Side (Zero Cloud Storage). Dilengkapi kompresi khusus berkas SSCASN/BUMN/LPSE (&lt;500 KB), tanda tangan basah digital (e-Sign) dengan auto-background remover, nomor halaman otomatis, penggabungan, dan pemisahan dokumen yang berjalan cepat bahkan saat offline.
-              </p>
-              <div class="grid grid-cols-2 gap-2 text-xs text-slate-500 pt-2">
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Kompres Khusus BKN/BUMN</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> e-Sign & Pembersih Kertas</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Nomor Halaman Skripsi</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Offline PWA & Install di HP</span>
-              </div>
-            </div>
-            <div class="pt-6 mt-6 border-t border-slate-100">
-              <a href="https://i-love-qyu.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all shadow-md shadow-indigo-600/20">
-                <span>Kunjungi WebApp iLoveQyu</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Proyek 3: WebGIS & Pemetaan Digital (WEB PROJECT) -->
-          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between p-7">
-            <div class="space-y-4">
-              <div class="flex flex-wrap gap-2">
-                <span class="text-xs font-bold bg-blue-50 text-primary-700 border border-blue-200 px-3 py-1 rounded-full">
-                  WebGIS & Leaflet
-                </span>
-                <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">Peta Interaktif</span>
-              </div>
-              <h3 class="text-2xl font-bold text-slate-900">Katalog WebGIS & Pemetaan Digital</h3>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Pusat proyek peta digital interaktif berbasis web. Berisi visualisasi data kependudukan Indonesia, batas wilayah administratif GeoJSON, serta galeri peta petualangan gunung (Mountain Gallery).
-              </p>
-              <div class="grid grid-cols-2 gap-2 text-xs text-slate-500 pt-2">
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Leaflet.js & GeoJSON</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Visualisasi Demografi</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Galeri Peta Gunung</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Antarmuka Responsif</span>
-              </div>
-            </div>
-            <div class="pt-6 mt-6 border-t border-slate-100">
-              <a href="webgis.html" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm transition-all shadow-md shadow-primary-600/20">
-                <span>Buka Katalog WebGIS</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Proyek 4: Buku Manajemen Pendidikan (KARYA BUKU AJAR) -->
-          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between p-7">
-            <div class="space-y-4">
-              <div class="flex flex-wrap gap-2">
-                <span class="text-xs font-bold bg-blue-50 text-primary-700 border border-blue-200 px-3 py-1 rounded-full">
-                  Buku Ajar & Naskah
-                </span>
-                <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">PDF Siap Cetak</span>
-              </div>
-              <h3 class="text-2xl font-bold text-slate-900">Buku Manajemen Pendidikan</h3>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Penyusunan dan perapian dokumen buku ajar akademik komprehensif. Meliputi struktur hierarki bab yang teratur, integrasi tabel & bagan terstandar, serta penataan tata letak elegan untuk kenyamanan pembaca.
-              </p>
-              <div class="grid grid-cols-2 gap-2 text-xs text-slate-500 pt-2">
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Format PDF Dokumen</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Struktur Bab Rapi</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Tabel & Bagan Presisi</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Siap Terbit / Cetak</span>
-              </div>
-            </div>
-            <div class="pt-6 mt-6 border-t border-slate-100">
-              <a href="Buku-Manajemen-Pendidikan.pdf" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-slate-900 hover:bg-primary-600 text-white font-bold text-sm transition-all shadow-md">
-                <span>Buka Dokumen Buku (PDF)</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Proyek 5: Slide Presentasi & Web Interaktif -->
-          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between p-7">
-            <div class="space-y-4">
-              <div class="flex flex-wrap gap-2">
-                <span class="text-xs font-bold bg-blue-50 text-primary-700 border border-blue-200 px-3 py-1 rounded-full">
-                  Presentasi Interaktif
-                </span>
-                <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">HTML & PDF</span>
-              </div>
-              <h3 class="text-2xl font-bold text-slate-900">Wadah Presentasi & Slide Web</h3>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Koleksi slide presentasi kuliah, seminar, dan materi akademik yang dirancang secara profesional. Dilengkapi versi PDF mobile-friendly dan versi HTML dengan animasi interaktif.
-              </p>
-              <div class="grid grid-cols-2 gap-2 text-xs text-slate-500 pt-2">
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Format Web & PDF</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Slide Kuliah & Seminar</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Animasi Transisi Halus</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-primary-600"></i> Desain Visual Bersih</span>
-              </div>
-            </div>
-            <div class="pt-6 mt-6 border-t border-slate-100">
-              <a href="ppt.html" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-slate-900 hover:bg-primary-600 text-white font-bold text-sm transition-all shadow-md">
-                <span>Buka Presentasi</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-
-
-
-    <!-- ==================== LAYANAN (DENGAN PRIORITAS WEB DEVELOPMENT) ==================== -->
-    <section id="layanan" class="py-20 bg-white border-t border-slate-100">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        
-        <div class="max-w-2xl mx-auto text-center space-y-3 mb-16">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary-600 bg-blue-50 px-4 py-1 rounded-full border border-blue-100">
-            Layanan Terintegrasi
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Layanan & Solusi yang Saya Tawarkan
-          </h2>
-          <p class="text-slate-600 text-sm sm:text-base">
-            Mulai dari pembuatan website dinamis, visualisasi peta digital, hingga penyusunan naskah buku ajar akademik.
-          </p>
-        </div>
-
-        <!-- 4 Layanan: Ikon Satu Warna Biru Seragam -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <!-- Layanan 1: Web Development (FOKUS UTAMA) -->
-          <div class="bg-slate-50/70 p-7 rounded-2xl border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 hover:shadow-lg hover:shadow-primary-600/5 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center mb-5">
-                <i data-lucide="layout" class="w-5 h-5"></i>
-              </div>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Web Development</h3>
-              <p class="text-slate-600 text-xs leading-relaxed mb-4">
-                Pembuatan aplikasi web modern, portal kelas, sistem repositori, dan landing page menggunakan Next.js & Supabase.
-              </p>
-              <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Next.js 15 & React 19</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Database realtime Supabase</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Tampilan responsif di HP & PC</li>
-              </ul>
-            </div>
-            <div class="pt-5 mt-4 border-t border-slate-100">
-              <a href="https://t.me/piantsa" target="_blank" class="text-xs font-bold text-primary-600 hover:text-primary-700 flex items-center gap-1">
-                <span>Konsultasi Web</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Layanan 2: WebGIS & Peta Spasial -->
-          <div class="bg-slate-50/70 p-7 rounded-2xl border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 hover:shadow-lg hover:shadow-primary-600/5 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center mb-5">
-                <i data-lucide="map-pin" class="w-5 h-5"></i>
-              </div>
-              <h3 class="text-base font-bold text-slate-900 mb-2">WebGIS & Pemetaan</h3>
-              <p class="text-slate-600 text-xs leading-relaxed mb-4">
-                Pembuatan peta digital interaktif web untuk menampilkan visualisasi data demografi dan batas wilayah GeoJSON.
-              </p>
-              <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Peta Leaflet.js interaktif</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Integrasi GeoJSON wilayah</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Popup data atribut detail</li>
-              </ul>
-            </div>
-            <div class="pt-5 mt-4 border-t border-slate-100">
-              <a href="https://t.me/piantsa" target="_blank" class="text-xs font-bold text-primary-600 hover:text-primary-700 flex items-center gap-1">
-                <span>Konsultasi WebGIS</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Layanan 3: Pembuatan Buku Ajar & Modul -->
-          <div class="bg-slate-50/70 p-7 rounded-2xl border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 hover:shadow-lg hover:shadow-primary-600/5 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center mb-5">
-                <i data-lucide="book-open" class="w-5 h-5"></i>
-              </div>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Pembuatan Buku Ajar</h3>
-              <p class="text-slate-600 text-xs leading-relaxed mb-4">
-                Penyusunan naskah buku ajar perkuliahan, modul pembelajaran, dan telaah pustaka secara runtut dan sistematis.
-              </p>
-              <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Struktur hierarki bab rapi</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Integrasi tabel & bagan</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Siap cetak & siap ajar</li>
-              </ul>
-            </div>
-            <div class="pt-5 mt-4 border-t border-slate-100">
-              <a href="https://t.me/piantsa" target="_blank" class="text-xs font-bold text-primary-600 hover:text-primary-700 flex items-center gap-1">
-                <span>Konsultasi Buku</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Layanan 4: Penyusunan Makalah & Format -->
-          <div class="bg-slate-50/70 p-7 rounded-2xl border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 hover:shadow-lg hover:shadow-primary-600/5 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center mb-5">
-                <i data-lucide="file-text" class="w-5 h-5"></i>
-              </div>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Makalah & Formatting</h3>
-              <p class="text-slate-600 text-xs leading-relaxed mb-4">
-                Bantuan penyusunan makalah ilmiah, skripsi, dan perapian tata letak dokumen formal sesuai gaya selingkung.
-              </p>
-              <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Daftar isi otomatis (TOC)</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Sitasi & daftar pustaka</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-primary-600"></i> Standar PUEBI / EYD</li>
-              </ul>
-            </div>
-            <div class="pt-5 mt-4 border-t border-slate-100">
-              <a href="https://t.me/piantsa" target="_blank" class="text-xs font-bold text-primary-600 hover:text-primary-700 flex items-center gap-1">
-                <span>Konsultasi Naskah</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-
-
-
-    <!-- ==================== ALUR KERJA (4 TAHAP) ==================== -->
-    <section id="alur" class="py-20 bg-slate-50/70 border-t border-slate-100">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        
-        <div class="max-w-2xl mx-auto text-center space-y-3 mb-16">
-          <span class="text-xs font-bold uppercase tracking-wider text-primary-600 bg-blue-50 px-4 py-1 rounded-full border border-blue-100">Sistematika Kolaborasi</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">4 Tahap Menuju Hasil Maksimal</h2>
-          <p class="text-slate-600 text-sm sm:text-base">Proses kolaborasi yang transparan untuk proyek web maupun penulisan materi.</p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm card-hover">
-            <div class="w-10 h-10 rounded-xl bg-primary-600 text-white font-extrabold flex items-center justify-center mb-4 shadow-md shadow-primary-600/20">
-              1
-            </div>
-            <h3 class="font-bold text-slate-900 mb-2">Konsultasi & Brief</h3>
-            <p class="text-slate-600 text-xs leading-relaxed">
-              Diskusi kebutuhan fitur website atau naskah buku ajar, tenggat waktu, dan spesifikasi teknologi.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm card-hover">
-            <div class="w-10 h-10 rounded-xl bg-primary-600 text-white font-extrabold flex items-center justify-center mb-4 shadow-md shadow-primary-600/20">
-              2
-            </div>
-            <h3 class="font-bold text-slate-900 mb-2">Pengerjaan & Koding</h3>
-            <p class="text-slate-600 text-xs leading-relaxed">
-              Aplikasi web mulai dikoding secara modular atau naskah disusun sistematis sesuai pedoman.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm card-hover">
-            <div class="w-10 h-10 rounded-xl bg-primary-600 text-white font-extrabold flex items-center justify-center mb-4 shadow-md shadow-primary-600/20">
-              3
-            </div>
-            <h3 class="font-bold text-slate-900 mb-2">Review & Uji Coba</h3>
-            <p class="text-slate-600 text-xs leading-relaxed">
-              Pengujian fungsi web atau pengecekan draf naskah bersama Anda untuk penyempurnaan menyeluruh.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm card-hover">
-            <div class="w-10 h-10 rounded-xl bg-primary-600 text-white font-extrabold flex items-center justify-center mb-4 shadow-md shadow-primary-600/20">
-              4
-            </div>
-            <h3 class="font-bold text-slate-900 mb-2">Deployment & Serah File</h3>
-            <p class="text-slate-600 text-xs leading-relaxed">
-              Peluncuran web langsung online (live production) atau pengiriman file dokumen siap pakai.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ==================== HUBUNGI SAYA (KONTAK) ==================== -->
-    <section id="kontak" class="py-20 bg-slate-900 text-white relative overflow-hidden">
-      <!-- Ambient Glow Decorators -->
-      <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center space-y-8">
-        <span class="text-xs font-bold uppercase tracking-wider text-primary-400 bg-primary-950/60 px-4 py-1.5 rounded-full border border-primary-500/30">
-          Mari Berkolaborasi
+        <!-- React 19 -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="-11.5 -10.23174 23 20.46348" fill="#00d8ff"><circle cx="0" cy="0" r="2.05" fill="#00d8ff"/><g stroke="#00d8ff" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>
+          <span>React.js 19</span>
         </span>
 
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-          Punya Ide Proyek Web atau Kebutuhan Naskah?
-        </h2>
+        <!-- Next.js 15 -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 180 180" fill="none"><mask id="nextMask" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180"><circle cx="90" cy="90" r="90" fill="black"/></mask><g mask="url(#nextMask)"><circle cx="90" cy="90" r="90" fill="black"/><path d="M149.508 157.438L69.147 54H54V125.979H66.9836V69.3831L139.999 164.845C143.333 162.614 146.509 160.137 149.508 157.438Z" fill="white"/><rect x="115" y="54" width="13" height="72" fill="white"/></g></svg>
+          <span>Next.js 15</span>
+        </span>
 
-        <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-          Diskusikan pembuatan website, peta digital WebGIS, buku ajar, maupun penyusunan makalah Anda bersama saya. Siap membantu dengan dedikasi penuh dan komunikasi cepat.
-        </p>
+        <!-- TypeScript -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 128 128"><path fill="#3178C6" d="M0 0h128v128H0z"/><path fill="#FFF" d="M57.6 98.4V88.8h-16v-60H30.4v70.4h27.2zm48-40.8c-2.4-4-6.4-7.2-12-9.6-5.6-2.4-12.8-3.6-21.6-3.6h-7.2v70.4h10.4V84h9.6c8 0 14.4-1.6 19.2-4.8 4.8-3.2 8-8 9.6-14.4 1.6-6.4 1.6-13.6-1.6-20.8z"/></svg>
+          <span>TypeScript</span>
+        </span>
 
-        <!-- Kartu Kontak Cepat -->
-        <div class="inline-flex flex-col sm:flex-row items-center gap-4 bg-slate-800/80 p-3 rounded-2xl border border-slate-700/60 backdrop-blur-md">
-          <div class="px-5 py-2 text-sm text-slate-300 font-mono" id="emailText">
-            sufyantsaury.id@gmail.com
+        <!-- JavaScript -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 630 630"><rect width="630" height="630" fill="#f7df1e"/><path d="m423.2 492.19c12.69 20.72 29.2 35.95 58.4 35.95 24.53 0 40.2-12.26 40.2-29.2 0-20.3-16.1-27.49-43.1-39.3l-14.8-6.35c-42.72-18.2-71.1-41-71.1-89.2 0-44.4 33.83-78.2 86.7-78.2 37.64 0 64.7 13.1 84.2 47.4l-46.1 29.6c-10.15-18.2-21.1-25.4-38.1-25.4-17.3 0-28.3 11-28.3 25.4 0 17.7 11 25 35.5 35.5l14.8 6.34c50.3 21.6 79.5 45.2 79.5 93.4 0 53.3-41.9 82.5-98.1 82.5-54.9 0-90.5-26.2-106.6-60.9zm-209.98 5.5c8.9 15.2 16.5 28 35.1 28 18.2 0 29.6-7.2 29.6-35.1v-200.7h59.2v202c0 60.9-35.5 87.5-87.5 87.5-47.37 0-74.88-24.5-88.8-54.6z"/></svg>
+          <span>JavaScript</span>
+        </span>
+
+        <!-- Tailwind CSS -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 54 33" fill="#38bdf8"><path fill-rule="evenodd" clip-rule="evenodd" d="M27 0c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.653C30.744 13.09 33.808 16.2 40.5 16.2c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C36.756 3.11 33.692 0 27 0zM13.5 16.2C6.3 16.2 1.8 19.8 0 27c2.7-3.6 5.85-4.95 9.45-4.05 2.054.514 3.522 2.004 5.147 3.653C17.244 29.29 20.308 32.4 27 32.4c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.005-5.147-3.653C23.256 19.31 20.192 16.2 13.5 16.2z"/></svg>
+          <span>Tailwind CSS</span>
+        </span>
+
+        <!-- Supabase -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 109 113" fill="none"><path d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0632L99.1934 40.0632C106.033 40.0632 109.914 47.9242 105.611 53.3424L63.7076 110.284Z" fill="#3ECF8E"/><path d="M45.317 2.02294C48.1765 -1.57845 53.9744 0.394863 54.0433 4.99268L54.3475 72.2437L9.83122 72.2437C2.99134 72.2437 -0.889758 64.3827 3.41315 58.9645L45.317 2.02294Z" fill="#249361"/></svg>
+          <span>Supabase</span>
+        </span>
+
+        <!-- PWA -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 512 512" fill="#5A0FC8"><path d="M472.9 268.4c-4.4-1.7-9.3-2.6-14.4-2.6-13.6 0-25.4 6.7-32.6 17.1l-60.5 88.5h-45.7l50.6-73.6c7.7-11.2 12.3-24.8 12.3-39.5 0-38.3-31.1-69.4-69.4-69.4H192v256h48v-85.3h73.2l61.6 85.3h58.3l-59.2-82.1c8.8-5.3 16.2-12.8 21.6-21.7l52.6-77.1c8.4-12.2 22.8-19.8 38.6-19.8 4.7 0 9.2.7 13.4 2.1l11.9-20.9c-12.7-4.5-26.6-7-41.1-7zM240 234.7h73.2c11.8 0 21.3 9.6 21.3 21.3s-9.6 21.3-21.3 21.3H240v-42.6zM74.7 187.7H26.7l96 256h48l48-128h-48l-24 64-76-192z"/></svg>
+          <span>PWA</span>
+        </span>
+
+        <!-- Leaflet.js -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 512 512" fill="#199900"><path d="M400 32c-35.3 0-64 28.7-64 64 0 23.6 12.8 44.3 32 55.4V288c0 17.7-14.3 32-32 32H176c-17.7 0-32-14.3-32-32V151.4c19.2-11.1 32-31.8 32-55.4 0-35.3-28.7-64-64-64s-64 28.7-64 64c0 23.6 12.8 44.3 32 55.4V288c0 53 43 96 96 96h160c53 0 96-43 96-96V151.4c19.2-11.1 32-31.8 32-55.4 0-35.3-28.7-64-64-64z"/></svg>
+          <span>Leaflet.js (WebGIS)</span>
+        </span>
+
+        <!-- GeoJSON -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+          <span>GeoJSON Spasial</span>
+        </span>
+
+        <!-- Python -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 110 110"><path fill="#3776AB" d="M54.2 0c-24.8 0-23.2 10.8-23.2 10.8l.1 11.2h23.7v3.4H21.5S7.2 23.8 7.2 48.6c0 24.8 12.5 23.9 12.5 23.9h7.5V62s-.4-12.5 12.3-12.5h23.6s11.8.2 11.8-11.6V11.8S76.8 0 54.2 0zM39.4 7.4c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5-4.5-2-4.5-4.5 2-4.5 4.5-4.5z"/><path fill="#FFD43B" d="M55.8 110c24.8 0 23.2-10.8 23.2-10.8l-.1-11.2H55.2v-3.4h33.3s14.3 1.6 14.3-23.2c0-24.8-12.5-23.9-12.5-23.9h-7.5V48s.4 12.5-12.3 12.5H46.9s-11.8-.2-11.8 11.6v26.1s-1.9 11.8 20.7 11.8zm14.8-7.4c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z"/></svg>
+          <span>Python</span>
+        </span>
+
+        <!-- Git -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 128 128"><path fill="#F05032" d="M125.7 57.3L70.7 2.3c-3-3-8-3-11 0l-11 11 14 14c3.2-1.1 6.9-.3 9.3 2.1 2.5 2.5 3.2 6.1 2.1 9.4l13.5 13.5c3.2-1.1 6.9-.3 9.3 2.1 3.9 3.9 3.9 10.3 0 14.2s-10.3 3.9-14.2 0c-2.5-2.5-3.2-6.1-2.1-9.4L64.2 45.7v32.5c.8.4 1.6.9 2.2 1.6 3.9 3.9 3.9 10.3 0 14.2s-10.3 3.9-14.2 0c-3.9-3.9-3.9-10.3 0-14.2.7-.7 1.5-1.2 2.3-1.6V45.2c-.8-.4-1.6-.9-2.3-1.6-2.5-2.5-3.2-6.2-2-9.5L36.8 20.7 2.3 55.2c-3 3-3 8 0 11l55 55c3 3 8 3 11 0l57.4-52.9c3.1-3 3.1-8 0-11z"/></svg>
+          <span>Git & GitHub</span>
+        </span>
+
+        <!-- Vercel -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 512 512" fill="#000000"><path fill-rule="evenodd" d="M256 48L496 464H16L256 48Z"/></svg>
+          <span>Vercel</span>
+        </span>
+
+        <!-- Networking TKJ -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          <span>Jaringan & TKJ</span>
+        </span>
+
+        <!-- Naskah Buku Ajar -->
+        <span class="brand-pill">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span>Buku Ajar & Naskah Akademik</span>
+        </span>
+
+      </div>
+    </section>
+
+    <!-- ================= 6. COMPETITIONS (TANPA KATA HACKATHON, MONOKROM) ================= -->
+    <section id="competitions" class="space-y-4">
+      <div class="space-y-1">
+        <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Competitions</h2>
+        <p class="text-xs text-neutral-500">Pencapaian dalam ajang kompetisi pengembangan web nasional.</p>
+      </div>
+
+      <!-- Card Juara 1 M-One Telkomsel (Monokrom) -->
+      <div class="bg-white p-5 rounded-2xl border border-neutral-200/90 shadow-2xs">
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-800 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="trophy" class="w-5 h-5"></i>
           </div>
-          <button onclick="copyEmail()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all">
-            <i data-lucide="copy" class="w-4 h-4"></i>
-            <span id="footerCopyBtn">Salin Email</span>
-          </button>
-        </div>
-
-        <div class="pt-4 flex flex-wrap justify-center items-center gap-6 text-slate-400 text-sm font-semibold">
-          <a href="https://t.me/piantsa" target="_blank" class="hover:text-primary-400 flex items-center gap-1.5 transition-colors">
-            <i data-lucide="send" class="w-4 h-4 text-primary-400"></i> Telegram (@piantsa)
-          </a>
-          <span>•</span>
-          <a href="mailto:sufyantsaury.id@gmail.com" class="hover:text-primary-400 flex items-center gap-1.5 transition-colors">
-            <i data-lucide="mail" class="w-4 h-4 text-primary-400"></i> Email Langsung
-          </a>
-          <span>•</span>
-          <span class="text-slate-400 flex items-center gap-1.5">
-            <i data-lucide="map-pin" class="w-4 h-4 text-primary-400"></i> Sumedang & Online
-          </span>
+          <div class="flex-1 space-y-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-3">
+              <h3 class="font-extrabold text-sm sm:text-base text-neutral-950">
+                Juara 1 — M-One Telkomsel Coding Competition 2026
+              </h3>
+              <span class="self-start text-[11px] text-white font-bold bg-neutral-950 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+                1st Place
+              </span>
+            </div>
+            <p class="text-xs font-medium text-neutral-500">Karya: TobiQuest · M-One Solution & Telkomsel</p>
+            <p class="text-xs text-neutral-600 leading-relaxed pt-1">
+              Meraih peringkat pertama melalui pengembangan platform edukasi interaktif siswa SD dengan fitur <em>Telkomsel Lite Mode (&lt;500 KB)</em> untuk daerah 3T serta panduan suara <em>AI Socratic Mentor</em>.
+            </p>
+            <div class="pt-3 flex flex-wrap items-center gap-2">
+              <a href="https://tobiquest.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
+                <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                <span>Live Website</span>
+              </a>
+              <button type="button" onclick="openAwardModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-800 font-bold text-xs transition-colors">
+                <i data-lucide="image" class="w-3.5 h-3.5 text-neutral-600"></i>
+                <span>Lihat Poster Pengumuman</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- ================= 7. SELECTED PROJECTS (KOMPAK + WADAH FOTO MONOKROM) ================= -->
+    <section id="projects" class="space-y-4">
+      <div class="space-y-1">
+        <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Selected Projects</h2>
+        <p class="text-xs text-neutral-500">Koleksi karya aplikasi web fungsional, utilitas dokumen, dan pemetaan.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- PROYEK 1: TobiQuest -->
+        <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <div>
+            <!-- FOTO PROYEK: TobiQuest -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <img
+                src="assets/foto-tobiquest.jpg"
+                alt="Preview platform pembelajaran interaktif TobiQuest"
+                width="1893"
+                height="1066"
+                loading="lazy"
+                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
+                Website
+              </span>
+            </div>
+
+            <div class="p-4 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <a href="https://tobiquest.vercel.app" target="_blank" rel="noopener noreferrer" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 flex items-center gap-1 transition-colors">
+                  <span>TobiQuest</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400"></i>
+                </a>
+              </div>
+              <p class="text-[11px] font-medium text-neutral-400">M-One Telkomsel Coding Competition · 2026</p>
+              <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                Platform pembelajaran interaktif siswa SD dengan panduan suara Web Speech AI Mentor, 5 stasiun lab sains virtual, dan mode hemat kuota daerah 3T.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-2 flex flex-wrap gap-1.5 border-t border-neutral-100">
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Next.js 16</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">TypeScript</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Web Speech</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Vercel</span>
+          </div>
+        </div>
+
+        <!-- PROYEK 2: Portal Kelas HK A -->
+        <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <div>
+            <!-- FOTO PROYEK: Web Kelas HK A -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <img
+                src="assets/foto-kelashka.jpg"
+                alt="Preview Web Kelas HK A 2025 UIN SSC"
+                width="1879"
+                height="1027"
+                loading="lazy"
+                class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
+                Website
+              </span>
+            </div>
+
+            <div class="p-4 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <a href="https://hukum-keluarga-a-2025.vercel.app/" target="_blank" rel="noopener noreferrer" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 flex items-center gap-1 transition-colors">
+                  <span>Web Kelas HK A</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400"></i>
+                </a>
+              </div>
+              <p class="text-[11px] font-medium text-neutral-400">Academic Portal · UIN SSC 2025</p>
+              <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                Platform sistem informasi akademik perkuliahan terpadu mahasiswa UIN SSC dengan fitur presensi digital realtime dan repositori berkas 11 mata kuliah.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-2 flex flex-wrap gap-1.5 border-t border-neutral-100">
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Next.js 15</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Supabase</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Tailwind</span>
+          </div>
+        </div>
+
+        <!-- PROYEK 3: iLoveQyu PWA -->
+        <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <div>
+            <!-- FOTO PROYEK: iLoveQyu PWA -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <img
+                src="assets/foto-iloveqyu.jpg"
+                alt="Preview aplikasi utilitas PDF iLoveQyu PWA"
+                width="1915"
+                height="1000"
+                loading="lazy"
+                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
+                PWA WebApp
+              </span>
+            </div>
+
+            <div class="p-4 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <a href="https://i-love-qyu.vercel.app" target="_blank" rel="noopener noreferrer" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 flex items-center gap-1 transition-colors">
+                  <span>iLoveQyu</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400"></i>
+                </a>
+              </div>
+              <p class="text-[11px] font-medium text-neutral-400">Privacy-First PDF Utility · 2026</p>
+              <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                Aplikasi utilitas PDF berbasis Progressive Web App (100% Client-Side) dengan kompresi berkas CASN/BUMN, tanda tangan basah digital, dan penomoran skripsi.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-2 flex flex-wrap gap-1.5 border-t border-neutral-100">
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">React 19</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">PWA Offline</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Zero-Server</span>
+          </div>
+        </div>
+
+        <!-- PROYEK 4: WebGIS & Demografi -->
+        <div class="project-card bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <div>
+            <!-- WADAH FOTO PROYEK: ganti dengan <img src="assets/foto-webgis.jpg" alt="Katalog WebGIS" loading="lazy" class="w-full h-full object-cover" /> -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <div class="text-center p-3">
+                <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
+                  <i data-lucide="map" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xs font-bold text-neutral-700 block">Katalog WebGIS</span>
+              </div>
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950 text-white px-2.5 py-0.5 rounded-md">
+                WebGIS
+              </span>
+            </div>
+
+            <div class="p-4 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <a href="webgis.html" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 flex items-center gap-1 transition-colors">
+                  <span>Katalog WebGIS</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400"></i>
+                </a>
+              </div>
+              <p class="text-[11px] font-medium text-neutral-400">Geospatial Demography · 2026</p>
+              <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                Pusat proyek peta digital interaktif web berbasis Leaflet.js yang menyajikan visualisasi data demografi Indonesia dan batas wilayah GeoJSON Jawa Barat.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-2 flex flex-wrap gap-1.5 border-t border-neutral-100">
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Leaflet.js</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">GeoJSON</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Spasial</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 8. SELECTED CREDENTIALS (MURNI MONOKROM ALA WAKHID) ================= -->
+    <section id="credentials" class="space-y-4">
+      <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Selected Credentials</h2>
+
+      <div class="space-y-3.5">
+        
+        <!-- Credential 1 -->
+        <div class="flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-700 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-bold text-xs sm:text-sm text-neutral-950">Juara 1 M-One Telkomsel Coding Competition 2026</h4>
+            <p class="text-xs text-neutral-500">M-One Solution & Telkomsel · 2026</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 9. CONTACT CARD (MONOKROM) ================= -->
+    <section id="contact" class="pt-2">
+      <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-10 text-center space-y-4 shadow-2xs">
+        <div class="inline-flex items-center px-3.5 py-1 rounded-full bg-neutral-950 text-white text-[11px] font-bold tracking-wider uppercase">
+          Contact
+        </div>
+        
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950">
+          Let's work together
+        </h2>
+        
+        <p class="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
+          Punya ide proyek website, WebGIS, atau kolaborasi karya digital? Jangan ragu untuk menghubungi saya melalui Telegram atau email.
+        </p>
+
+        <div class="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3">
+          <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-neutral-950 hover:bg-neutral-800 text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span>Telegram (@piantsa)</span>
+          </a>
+          <button type="button" onclick="copyEmail()" class="px-5 py-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-xs font-bold transition-all flex items-center justify-center gap-2 border border-neutral-200">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span id="copyBtnText">Salin Email</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-slate-950 text-slate-500 text-xs py-8 border-t border-slate-900">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© 2026 Sufyan Tsaury. Web Developer & Digital .</p>
-      <div class="flex items-center gap-5">
-        <a href="#beranda" class="hover:text-slate-300 transition-colors">Beranda</a>
-        <a href="#tentang" class="hover:text-slate-300 transition-colors">Tentang</a>
-        <a href="#statistik" class="hover:text-slate-300 transition-colors">Statistik</a>
-        <a href="#portofolio" class="hover:text-slate-300 transition-colors">Proyek Web</a>
-        <a href="#layanan" class="hover:text-slate-300 transition-colors">Layanan</a>
-        <a href="#kontak" class="hover:text-slate-300 transition-colors">Kontak</a>
+  <!-- ================= 10. FLOATING DOCK BAR MONOKROM ================= -->
+  <nav aria-label="Quick Navigation" class="dock-safe fixed left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] bg-white/90 backdrop-blur-md border border-neutral-200/90 shadow-lg rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-0.5 sm:gap-2.5">
+    <a href="#about" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="About">
+      <i data-lucide="user" class="w-4 h-4"></i>
+    </a>
+    <a href="#experience" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Experience">
+      <i data-lucide="briefcase" class="w-4 h-4"></i>
+    </a>
+    <a href="#education" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Education">
+      <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+    </a>
+    <a href="#competitions" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Competitions">
+      <i data-lucide="trophy" class="w-4 h-4"></i>
+    </a>
+    <a href="#projects" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Projects">
+      <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+    </a>
+    <div class="w-[1px] h-4 bg-neutral-200"></div>
+    <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Telegram">
+      <i data-lucide="send" class="w-4 h-4"></i>
+    </a>
+    <a href="mailto:sufyantsaury.id@gmail.com" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Email">
+      <i data-lucide="mail" class="w-4 h-4"></i>
+    </a>
+  </nav>
+
+  <!-- ==================== NATIVE DIALOG MODAL POSTER JUARA 1 TELKOMSEL ==================== -->
+  <dialog id="awardModal" closedby="any" aria-labelledby="awardModalTitle" class="m-auto p-0 rounded-3xl max-w-lg w-[calc(100%-1.5rem)] bg-white text-neutral-900 shadow-2xl border border-neutral-200 overflow-hidden">
+    <div class="p-4 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
+      <div class="flex items-center gap-2">
+        <i data-lucide="trophy" class="w-4 h-4 text-neutral-800"></i>
+        <h3 id="awardModalTitle" class="font-extrabold text-sm text-neutral-950">Juara 1 M-One Telkomsel 2026</h3>
+      </div>
+      <form method="dialog">
+        <button type="submit" aria-label="Tutup" class="w-8 h-8 rounded-full bg-neutral-200/80 hover:bg-neutral-300 flex items-center justify-center text-neutral-700 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+    <div class="p-3 sm:p-4 max-h-[65vh] sm:max-h-[75vh] overflow-y-auto">
+      <img src="assets/juara-mone-telkomsel.jpg" alt="Pengumuman Juara 1 M-One Telkomsel Coding Competition 2026" fetchpriority="low" loading="lazy" class="w-full rounded-2xl border border-neutral-200" />
+      <div class="mt-4 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200 text-xs text-neutral-600 leading-relaxed">
+        <p class="font-bold text-neutral-950 mb-1">Karya: TobiQuest — Sufyan Tsaury</p>
+        <p>M-One Telkomsel Coding Competition 2026: Platform pembelajaran web inovatif untuk anak SD dengan Telkomsel Lite Mode (&lt;500 KB) dan Web Speech AI Mentor.</p>
       </div>
     </div>
-  </footer>
+    <div class="p-4 border-t border-neutral-200 flex gap-2">
+      <a href="https://tobiquest.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs text-center transition-colors">
+        Buka Live TobiQuest
+      </a>
+      <form method="dialog">
+        <button type="submit" class="px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs transition-colors">
+          Tutup
+        </button>
+      </form>
+    </div>
+  </dialog>
 
-  <!-- Toast Notifikasi Salin Email -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-    <div class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3">
-      <div class="w-7 h-7 rounded-full bg-primary-500/20 text-primary-400 flex items-center justify-center">
-        <i data-lucide="check" class="w-4 h-4"></i>
-      </div>
-      <p class="text-sm font-semibold">Email berhasil disalin ke clipboard!</p>
+  <!-- Toast Notification Salin Email (Monokrom) -->
+  <div id="toast" class="fixed top-4 inset-x-4 sm:inset-x-auto sm:right-6 sm:top-6 z-50 flex justify-center sm:justify-end transform -translate-y-16 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-neutral-950 text-white px-4 py-2.5 rounded-xl shadow-lg border border-neutral-800 flex items-center gap-2 text-xs font-semibold">
+      <i data-lucide="check" class="w-4 h-4 text-neutral-300"></i>
+      <span>Email berhasil disalin ke clipboard</span>
     </div>
   </div>
 
-  <!-- SCRIPT INTERAKTIF & RUNNING NUMBER COUNTER -->
+  <!-- ==================== SCRIPT INTERAKTIF & ANIMASI TITIK-TITIK MONOKROM ==================== -->
   <script>
-    // Inisialisasi ikon Lucide
     lucide.createIcons();
 
-    // Toggle Menu Mobile
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+    const awardDialog = document.getElementById('awardModal');
 
-    // Salin Email Interaktif & Tampilkan Toast
-    function copyEmail() {
-      const email = 'sufyantsaury.id@gmail.com';
-      navigator.clipboard.writeText(email).then(() => {
-        const toast = document.getElementById('toast');
-        toast.classList.remove('translate-y-20', 'opacity-0');
-        
-        const footerBtn = document.getElementById('footerCopyBtn');
-        if(footerBtn) footerBtn.innerText = 'Tersalin!';
-        const quickText = document.getElementById('quickCopyEmailText');
-        if(quickText) quickText.innerText = 'Email Tersalin!';
-
-        setTimeout(() => {
-          toast.classList.add('translate-y-20', 'opacity-0');
-          if(footerBtn) footerBtn.innerText = 'Salin Email';
-          if(quickText) quickText.innerText = 'sufyantsaury.id@gmail.com';
-        }, 2500);
-      });
-    }
-
-    // INTERAKSI KLIK KARTU STATISTIK DENGAN AKSEN WARNA MASING-MASING
-    function selectStatCard(clickedCard) {
-      const color = clickedCard.getAttribute('data-color') || 'blue';
-      const activeClass = `active-${color}`;
-      const isAlreadyActive = clickedCard.classList.contains(activeClass);
-
-      document.querySelectorAll('.stat-card').forEach(card => {
-        const c = card.getAttribute('data-color') || 'blue';
-        card.classList.remove(`active-${c}`, 'active');
-      });
-
-      if (!isAlreadyActive) {
-        clickedCard.classList.add(activeClass, 'active');
+    function openAwardModal() {
+      if (awardDialog && typeof awardDialog.showModal === 'function') {
+        awardDialog.showModal();
       }
     }
 
-    // ANIMASI ANGKA STATISTIK BERJALAN DARI NOL
-    let hasAnimatedCounters = false;
-
-    function animateCounters() {
-      if (hasAnimatedCounters) return;
-      hasAnimatedCounters = true;
-
-      const counters = document.querySelectorAll('.stat-counter');
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'), 10);
-        const isRaw = counter.getAttribute('data-raw') === 'true';
-        const duration = 1600; // 1.6 detik animasi berjalan jelas dari 0
-        let startTime = null;
-
-        function update(currentTime) {
-          if (!startTime) startTime = currentTime;
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          
-          // Easing Cubic Out agar melambat elegan di akhir
-          const easeProgress = 1 - Math.pow(1 - progress, 3);
-          const currentVal = Math.floor(easeProgress * target);
-          
-          counter.textContent = isRaw ? currentVal : currentVal.toLocaleString('id-ID');
-
-          if (progress < 1) {
-            requestAnimationFrame(update);
-          } else {
-            counter.textContent = isRaw ? target : target.toLocaleString('id-ID');
-          }
-        }
-        requestAnimationFrame(update);
+    // Fallback light-dismiss untuk browser yang belum mendukung <dialog closedby="any">
+    if (awardDialog && !('closedBy' in HTMLDialogElement.prototype)) {
+      awardDialog.addEventListener('click', (event) => {
+        if (event.target !== awardDialog) return;
+        const rect = awardDialog.getBoundingClientRect();
+        const isDialogContent = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (isDialogContent) return;
+        awardDialog.close();
       });
     }
 
-    // Observer: Jalankan animasi saat bagian statistik pertama kali terlihat di layar
-    const statSection = document.getElementById('statistik');
-    if ('IntersectionObserver' in window && statSection) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animateCounters();
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.15 });
-      observer.observe(statSection);
-    } else {
-      // Fallback jika tidak mendukung IntersectionObserver
-      setTimeout(animateCounters, 500);
+    // Salin Email
+    function copyEmail() {
+      const email = 'sufyantsaury.id@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = document.getElementById('copyBtnText');
+        const toast = document.getElementById('toast');
+        
+        btn.textContent = 'Email Tersalin ✓';
+        toast.classList.remove('-translate-y-16', 'opacity-0');
+        
+        setTimeout(() => {
+          btn.textContent = 'Salin Email';
+          toast.classList.add('-translate-y-16', 'opacity-0');
+        }, 2200);
+      });
     }
+
+    // ========================================================
+    // KANVAS TITIK-TITIK BERGERAK DI HEADER (MONOKROM ABU/HITAM)
+    // ========================================================
+    (function initHeroDots() {
+      const canvas = document.getElementById('heroDotsCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let width = 0, height = 0, lastWidth = 0;
+      let dots = [];
+      let rafId = null;
+
+      function setup() {
+        const parent = canvas.parentElement;
+        const w = parent.clientWidth;
+        const h = parent.clientHeight;
+        if (!w || !h) return;
+
+        if (w === lastWidth && dots.length) return;
+        lastWidth = w;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = w;
+        height = h;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const gap = w < 640 ? 22 : 24;
+        dots = [];
+        for (let x = gap / 2; x < width; x += gap) {
+          for (let y = gap / 2; y < height; y += gap) {
+            dots.push({
+              x: x,
+              y: y,
+              baseAlpha: Math.random() * 0.16 + 0.05,
+              phase: Math.random() * Math.PI * 2,
+              speed: 0.015 + Math.random() * 0.02
+            });
+          }
+        }
+        if (reduceMotion) render(false);
+      }
+
+      function render(animate) {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < dots.length; i++) {
+          const d = dots[i];
+          if (animate) d.phase += d.speed;
+
+          const pulse = (Math.sin(d.phase) + 1) / 2;
+          const alpha = d.baseAlpha * (0.55 + 0.65 * pulse);
+          const fadeBottom = Math.max(0, 1 - (d.y / height) * 1.15);
+
+          // Murni monokrom abu-hitam
+          ctx.fillStyle = `rgba(23, 23, 23, ${alpha * fadeBottom * 1.35})`;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function loop() {
+        render(true);
+        rafId = requestAnimationFrame(loop);
+      }
+
+      function start() { if (!reduceMotion && rafId === null) loop(); }
+      function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setup, 150);
+      });
+
+      setup();
+      start();
+    })();
   </script>
 </body>
 </html>
