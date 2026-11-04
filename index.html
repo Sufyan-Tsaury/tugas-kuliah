@@ -149,7 +149,7 @@
           </div>
         </div>
 
-        <!-- Avatar Profil Bulat (Simpan foto Anda di assets/foto-profil.jpg) -->
+        <!-- Avatar Profil Bulat -->
         <div class="relative w-16 h-16 min-[400px]:w-20 min-[400px]:h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-white shadow-md bg-neutral-950 flex items-center justify-center flex-shrink-0">
           <img 
             src="aset/foto-profil.jpg" 
@@ -158,7 +158,7 @@
             width="112"
             height="112"
             onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
-            class="w-full h-full object-cover object-top"
+            class="w-full h-full object-cover object-[center_35%]"
           />
           <span hidden aria-hidden="true" class="text-white font-extrabold text-lg sm:text-2xl tracking-tight select-none">ST</span>
         </div>
@@ -358,10 +358,22 @@
           <span>Jaringan & TKJ</span>
         </span>
 
-        <!-- Naskah Buku Ajar -->
+        <!-- Microsoft Word -->
         <span class="brand-pill">
-          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-          <span>Buku Ajar & Naskah Akademik</span>
+          <img src="aset/icon-word.png" alt="Microsoft Word" width="16" height="16" loading="lazy" class="w-4 h-4 flex-shrink-0 object-contain" />
+          <span>Microsoft Word</span>
+        </span>
+
+        <!-- Microsoft Excel -->
+        <span class="brand-pill">
+          <img src="aset/icon-excel.png" alt="Microsoft Excel" width="16" height="16" loading="lazy" class="w-4 h-4 flex-shrink-0 object-contain" />
+          <span>Microsoft Excel</span>
+        </span>
+
+        <!-- Microsoft PowerPoint -->
+        <span class="brand-pill">
+          <img src="aset/icon-powerpoint.png" alt="Microsoft PowerPoint" width="16" height="16" loading="lazy" class="w-4 h-4 flex-shrink-0 object-contain" />
+          <span>Microsoft PowerPoint</span>
         </span>
 
       </div>
@@ -420,15 +432,15 @@
         <!-- PROYEK 1: TobiQuest -->
         <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
           <div>
-            <!-- FOTO PROYEK: TobiQuest -->
+            <!-- FOTO PROYEK: TobiQuest Showcase Poster -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
               <img
-                src="aset/foto-tobiquest.jpg"
-                alt="Preview platform pembelajaran interaktif TobiQuest"
-                width="1893"
-                height="1066"
+                src="aset/poster-tobiquest.jpg"
+                alt="Showcase poster platform pembelajaran interaktif TobiQuest"
+                width="1920"
+                height="1080"
                 loading="lazy"
-                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
                 Website
@@ -538,7 +550,7 @@
         <!-- PROYEK 4: WebGIS & Demografi -->
         <div class="project-card bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
           <div>
-            <!-- WADAH FOTO PROYEK: ganti dengan <img src="assets/foto-webgis.jpg" alt="Katalog WebGIS" loading="lazy" class="w-full h-full object-cover" /> -->
+            <!-- WADAH FOTO PROYEK: ganti dengan <img src="aset/foto-webgis.jpg" alt="Katalog WebGIS" loading="lazy" class="w-full h-full object-cover" /> -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
               <div class="text-center p-3">
                 <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
@@ -665,7 +677,7 @@
       </form>
     </div>
     <div class="p-3 sm:p-4 max-h-[65vh] sm:max-h-[75vh] overflow-y-auto">
-      <img src="assets/juara-mone-telkomsel.jpg" alt="Pengumuman Juara 1 M-One Telkomsel Coding Competition 2026" fetchpriority="low" loading="lazy" class="w-full rounded-2xl border border-neutral-200" />
+      <img src="aset/juara-mone-telkomsel.jpg" alt="Pengumuman Juara 1 M-One Telkomsel Coding Competition 2026" fetchpriority="low" loading="lazy" class="w-full rounded-2xl border border-neutral-200" />
       <div class="mt-4 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200 text-xs text-neutral-600 leading-relaxed">
         <p class="font-bold text-neutral-950 mb-1">Karya: TobiQuest — Sufyan Tsaury</p>
         <p>M-One Telkomsel Coding Competition 2026: Platform pembelajaran web inovatif untuk anak SD dengan Telkomsel Lite Mode (&lt;500 KB) dan Web Speech AI Mentor.</p>
