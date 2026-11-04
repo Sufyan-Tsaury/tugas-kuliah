@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Katalog Proyek WebGIS & Pemetaan Digital oleh Sufyan Tsaury — Visualisasi Geospasial, Leaflet.js, GeoJSON & Peta Interaktif." />
   <meta name="author" content="Sufyan Tsaury" />
-  <title>WebGIS & Pemetaan Digital — Sufyan Tsaury</title>
+  <title>Katalog WebGIS & Pemetaan Digital | Sufyan Tsaury</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Font: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -24,18 +24,7 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-          colors: {
-            primary: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            }
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
@@ -43,346 +32,471 @@
   </script>
 
   <style>
-    * {
-      transition-property: color, background-color, border-color, opacity, box-shadow, transform;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 200ms;
+    ::selection {
+      background-color: #09090b;
+      color: #ffffff;
     }
-    .card-hover:hover {
-      transform: translateY(-4px);
+
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    img { max-width: 100%; }
+    h1, h2, h3, p, li { overflow-wrap: anywhere; }
+    [hidden] { display: none !important; }
+
+    /* Brand Pill Tech (Monokrom Bersih) */
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background-color: #ffffff;
+      border: 1px solid #e5e5e5;
+      color: #171717;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+      transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+    .brand-pill:hover {
+      background-color: #f5f5f5;
+      border-color: #a3a3a3;
+      color: #09090b;
+      transform: translateY(-1px);
+    }
+
+    /* Kartu Proyek Kompak Monokrom */
+    .project-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: #a3a3a3;
+      box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.07), 0 6px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Wadah Foto Preview Peta Monokrom */
+    .photo-slot {
+      background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
+    }
+
+    /* Dock aman untuk layar HP modern */
+    .dock-safe { bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+
+    /* Fokus keyboard kontras tinggi */
+    :where(a:any-link, button):focus-visible {
+      outline: 2px solid #09090b;
+      outline-offset: 2px;
+    }
+
+    /* Hormati preferensi pengguna yang mematikan animasi */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 
-<body class="bg-slate-50/60 text-slate-800 font-sans antialiased selection:bg-primary-600 selection:text-white min-h-screen flex flex-col justify-between">
+<body class="bg-[#fafafa] text-neutral-900 font-sans antialiased min-h-dvh py-10 sm:py-14 lg:py-20 px-4 sm:px-8 relative pb-32 overflow-x-hidden flex flex-col justify-between">
 
-  <!-- ==================== TOP NAVIGATION ==================== -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      
-      <!-- Tombol Kembali ke Beranda -->
-      <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold transition-all">
-        <i data-lucide="arrow-left" class="w-4 h-4 text-primary-600"></i>
-        <span>Kembali ke Portofolio</span>
-      </a>
+  <!-- ==================== KANVAS TITIK-TITIK BERGERAK MONOKROM DI ATAS ==================== -->
+  <div class="absolute inset-x-0 top-0 h-[420px] overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <canvas id="heroDotsCanvas" class="w-full h-full opacity-75"></canvas>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#fafafa]"></div>
+  </div>
 
-      <!-- Brand Info -->
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-primary-600 text-white font-extrabold text-sm flex items-center justify-center shadow-sm">
-          ST
-        </div>
-        <div class="hidden sm:block text-left">
-          <span class="text-sm font-extrabold text-slate-900 block leading-tight">Sufyan Tsaury</span>
-          <span class="text-[10px] font-semibold text-slate-500 block">WebGIS & Digital Map</span>
-        </div>
-      </div>
+  <!-- WRAPPER UTAMA (SELARAS DENGAN INDEX.HTML) -->
+  <div class="w-full max-w-2xl lg:max-w-3xl mx-auto space-y-8 sm:space-y-10 relative z-10 flex-1">
 
-      <!-- Tombol Kontak Cepat -->
-      <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-xs sm:text-sm font-bold shadow-sm shadow-primary-600/20 transition-all">
-        <i data-lucide="send" class="w-3.5 h-3.5"></i>
-        <span>Telegram</span>
-      </a>
-    </div>
-  </header>
+    <!-- ================= 1. HEADER & TOMBOL KEMBALI ================= -->
+    <header class="space-y-5">
+      <div class="flex items-center justify-between gap-3">
+        <a href="index.html#projects" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-800 text-xs font-bold shadow-2xs transition-colors">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5" aria-hidden="true"></i>
+          <span>Kembali ke Portofolio</span>
+        </a>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full space-y-10">
-
-    <!-- ==================== HERO BANNER ==================== -->
-    <section class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm relative overflow-hidden">
-      <div class="absolute -right-16 -top-16 w-80 h-80 bg-blue-50 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-
-      <div class="max-w-3xl space-y-4">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-primary-700 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="map" class="w-3.5 h-3.5 text-primary-600"></i>
-          WebGIS & Geospatial Projects
-        </div>
-
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-          Katalog WebGIS & <span class="text-primary-600">Pemetaan Digital</span>
-        </h1>
-
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          Kumpulan proyek peta digital interaktif berbasis web untuk visualisasi demografi wilayah Indonesia, batas spasial GeoJSON, serta galeri petualangan gunung terintegrasi.
-        </p>
-
-        <!-- Tech Pills -->
-        <div class="flex flex-wrap gap-2 pt-2">
-          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1.5">
-            <i data-lucide="layers" class="w-3.5 h-3.5 text-primary-600"></i> Leaflet.js
-          </span>
-          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1.5">
-            <i data-lucide="code" class="w-3.5 h-3.5 text-primary-600"></i> GeoJSON MultiPolygon
-          </span>
-          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1.5">
-            <i data-lucide="globe" class="w-3.5 h-3.5 text-primary-600"></i> OpenStreetMap Tiles
-          </span>
-          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1.5">
-            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-primary-600"></i> Visualisasi Tematik
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== FILTER BAR ==================== -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-2">
-      <button class="filter-btn active px-5 py-2 rounded-full bg-primary-600 text-white font-bold text-xs sm:text-sm shadow-sm transition-all whitespace-nowrap" onclick="filterProjects('all', this)">
-        Semua Proyek (3)
-      </button>
-      <button class="filter-btn px-5 py-2 rounded-full bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 font-bold text-xs sm:text-sm transition-all whitespace-nowrap" onclick="filterProjects('demografi', this)">
-        Demografi & Wilayah
-      </button>
-      <button class="filter-btn px-5 py-2 rounded-full bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 font-bold text-xs sm:text-sm transition-all whitespace-nowrap" onclick="filterProjects('outdoor', this)">
-        Galeri Gunung
-      </button>
-    </div>
-
-    <!-- ==================== PROJECTS GRID ==================== -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Proyek 1: Peta Kependudukan Indonesia -->
-      <article class="project-card bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between" data-category="demografi">
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-primary-600 flex items-center justify-center">
-              <i data-lucide="globe-2" class="w-6 h-6"></i>
-            </div>
-            <span class="text-[11px] font-extrabold px-3 py-1 rounded-full bg-blue-50 text-primary-700 border border-blue-200">
-              Live Interactive
-            </span>
-          </div>
-
-          <h3 class="text-xl font-bold text-slate-900 leading-snug">
-            Peta Kependudukan 38 Provinsi Indonesia 2026
-          </h3>
-
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Portal spasial nasional visualisasi data kependudukan, IPM, kemiskinan, dan agama di 38 provinsi Indonesia dengan fitur komparasi dan ekspor data tabel.
-          </p>
-
-          <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Cakupan lengkap 38 provinsi termasuk 4 DOB Papua</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Komparasi antar-provinsi & tabel data CSV/JSON</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Grafik komposisi agama & statistik interaktif</span>
-            </li>
-          </ul>
-
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Leaflet.js</span>
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">38 Provinsi</span>
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Tabel & CSV</span>
-          </div>
-        </div>
-
-        <div class="pt-6 mt-6 border-t border-slate-100 flex gap-2">
-          <a href="https://sufyan-tsaury.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-bold text-xs transition-all shadow-sm shadow-primary-600/20">
-            <span>Buka Peta Nasional</span>
-            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-          </a>
-          <a href="index.html#portofolio" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">
-            Detail
-          </a>
-        </div>
-      </article>
-
-      <!-- Proyek 2: Demografi Jawa Barat 2026 -->
-      <article class="project-card bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between" data-category="demografi">
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-primary-600 flex items-center justify-center">
-              <i data-lucide="map-pin" class="w-6 h-6"></i>
-            </div>
-            <span class="text-[11px] font-extrabold px-3 py-1 rounded-full bg-blue-50 text-primary-700 border border-blue-200">
-              Baru · Jabar 2026
-            </span>
-          </div>
-
-          <h3 class="text-xl font-bold text-slate-900 leading-snug">
-            Demografi 27 Kabupaten & Kota Jawa Barat
-          </h3>
-
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Dashboard WebGIS khusus wilayah Jawa Barat dengan layer kependudukan, IPM, kemiskinan, struktur ekonomi wilayah, dan fitur download PNG transparan.
-          </p>
-
-          <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Detail 27 Kabupaten & Kota se-Jawa Barat</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Pencarian instan & grafik sektor ekonomi daerah</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Fitur ekspor poligon PNG transparan HD</span>
-            </li>
-          </ul>
-
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">27 Kab/Kota</span>
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Chart.js Sektor</span>
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Export PNG</span>
-          </div>
-        </div>
-
-        <div class="pt-6 mt-6 border-t border-slate-100 flex gap-2">
-          <a href="jawabarat.html" class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-bold text-xs transition-all shadow-sm shadow-primary-600/20">
-            <span>Buka Peta Jabar</span>
-            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-          </a>
-          <a href="index.html#portofolio" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">
-            Detail
-          </a>
-        </div>
-      </article>
-
-      <!-- Proyek 3: Mountain Gallery -->
-      <article class="project-card bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm card-hover hover:border-primary-600 flex flex-col justify-between" data-category="outdoor">
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-primary-600 flex items-center justify-center">
-              <i data-lucide="mountain" class="w-6 h-6"></i>
-            </div>
-            <span class="text-[11px] font-extrabold px-3 py-1 rounded-full bg-blue-50 text-primary-700 border border-blue-200">
-              Live Project
-            </span>
-          </div>
-
-          <h3 class="text-xl font-bold text-slate-900 leading-snug">
-            Mountain Gallery & Interactive Map
-          </h3>
-
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Platform peta digital interaktif yang menyajikan sebaran gunung di Indonesia, data ketinggian (MDPL), jalur pendakian resmi, serta dokumentasi galeri foto.
-          </p>
-
-          <ul class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Pin marker interaktif setiap lokasi gunung</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Popup galeri foto dan rangkuman ketinggian</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i data-lucide="check" class="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5"></i>
-              <span>Integrasi base map OpenStreetMap HD</span>
-            </li>
-          </ul>
-
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Outdoor GIS</span>
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Gallery Modal</span>
-            <span class="text-[11px] font-semibold bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md">Elevation Data</span>
-          </div>
-        </div>
-
-        <div class="pt-6 mt-6 border-t border-slate-100 flex gap-2">
-          <a href="https://sufyan-tsaury.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-bold text-xs transition-all shadow-sm shadow-primary-600/20">
-            <span>Buka Mountain Gallery</span>
-            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-          </a>
-          <a href="index.html#portofolio" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">
-            Detail
-          </a>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- ==================== KEMAMPUAN TEKNIS ==================== -->
-    <section class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm space-y-8">
-      <div class="max-w-xl space-y-2">
-        <span class="text-xs font-bold uppercase tracking-wider text-primary-600 bg-blue-50 px-3.5 py-1 rounded-full border border-blue-100">
-          Kapabilitas
+        <span class="text-xs font-mono text-neutral-400 hidden sm:inline">
+          Sufyan Tsaury · GIS
         </span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Kemampuan Teknis WebGIS
-        </h2>
-        <p class="text-slate-600 text-xs sm:text-sm">
-          Standar keunggulan dalam pengembangan peta interaktif berbasis web.
+      </div>
+
+      <div class="space-y-2.5">
+        <h1 class="text-2xl min-[400px]:text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-950 leading-tight">
+          Katalog WebGIS & Pemetaan Digital
+        </h1>
+        <p class="text-neutral-600 text-sm sm:text-base leading-relaxed text-pretty">
+          Kumpulan proyek peta interaktif berbasis web untuk visualisasi demografi wilayah Indonesia, batas spasial GeoJSON Kabupaten/Kota Jawa Barat, serta pemetaan jalur dan elevasi gunung.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center">
-            <i data-lucide="zap" class="w-5 h-5"></i>
-          </div>
-          <h4 class="font-bold text-slate-900 text-base">Performa Ringan & Cepat</h4>
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Dibuat menggunakan script native yang teroptimasi tanpa dependensi berat yang membebani browser pengguna.
-          </p>
-        </div>
+      <!-- Tech Stack Pills -->
+      <div class="flex flex-wrap gap-2 pt-0.5">
+        <span class="brand-pill">
+          <svg aria-hidden="true" class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 512 512" fill="#199900"><path d="M400 32c-35.3 0-64 28.7-64 64 0 23.6 12.8 44.3 32 55.4V288c0 17.7-14.3 32-32 32H176c-17.7 0-32-14.3-32-32V151.4c19.2-11.1 32-31.8 32-55.4 0-35.3-28.7-64-64-64s-64 28.7-64 64c0 23.6 12.8 44.3 32 55.4V288c0 53 43 96 96 96h160c53 0 96-43 96-96V151.4c19.2-11.1 32-31.8 32-55.4 0-35.3-28.7-64-64-64z"/></svg>
+          <span>Leaflet.js</span>
+        </span>
+        <span class="brand-pill">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-neutral-700" aria-hidden="true"></i>
+          <span>GeoJSON MultiPolygon</span>
+        </span>
+        <span class="brand-pill">
+          <i data-lucide="globe" class="w-3.5 h-3.5 text-neutral-700" aria-hidden="true"></i>
+          <span>OpenStreetMap Tiles</span>
+        </span>
+        <span class="brand-pill">
+          <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-neutral-700" aria-hidden="true"></i>
+          <span>Visualisasi Tematik</span>
+        </span>
+      </div>
+    </header>
 
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center">
-            <i data-lucide="smartphone" class="w-5 h-5"></i>
-          </div>
-          <h4 class="font-bold text-slate-900 text-base">Responsif di Semua Layar</h4>
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Peta dapat dinavigasi dengan mulus melalui cubit layar (pinch-to-zoom) pada smartphone maupun mouse desktop.
-          </p>
-        </div>
+    <!-- ================= 2. MAIN CONTENT: FILTER & DAFTAR PETA ================= -->
+    <main class="space-y-5">
 
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary-600 flex items-center justify-center">
-            <i data-lucide="palette" class="w-5 h-5"></i>
+      <!-- Filter Bar Monokrom -->
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter kategori proyek WebGIS">
+        <button
+          type="button"
+          aria-pressed="true"
+          onclick="filterProjects('all', this)"
+          class="filter-btn px-4 py-2 rounded-full bg-neutral-950 text-white border border-neutral-950 font-bold text-xs transition-colors"
+        >
+          Semua Proyek (3)
+        </button>
+        <button
+          type="button"
+          aria-pressed="false"
+          onclick="filterProjects('demografi', this)"
+          class="filter-btn px-4 py-2 rounded-full bg-white hover:bg-neutral-100 text-neutral-600 border border-neutral-200 font-bold text-xs transition-colors"
+        >
+          Demografi & Wilayah (2)
+        </button>
+        <button
+          type="button"
+          aria-pressed="false"
+          onclick="filterProjects('outdoor', this)"
+          class="filter-btn px-4 py-2 rounded-full bg-white hover:bg-neutral-100 text-neutral-600 border border-neutral-200 font-bold text-xs transition-colors"
+        >
+          Galeri Gunung (1)
+        </button>
+      </div>
+
+      <!-- Grid Kartu Proyek WebGIS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- PROYEK 1: Peta Kependudukan 38 Provinsi Indonesia -->
+        <article class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between" data-category="demografi">
+          <div>
+            <!-- WADAH FOTO PETA: ganti div placeholder di dalam .photo-slot dengan <img src="assets/foto-indonesia.jpg" alt="Preview Peta Kependudukan 38 Provinsi Indonesia" width="1600" height="900" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]" /> -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <div class="text-center p-3">
+                <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
+                  <i data-lucide="globe-2" class="w-5 h-5" aria-hidden="true"></i>
+                </div>
+                <span class="text-xs font-bold text-neutral-700 block">38 Provinsi Indonesia</span>
+              </div>
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md">
+                Live Interactive
+              </span>
+            </div>
+
+            <div class="p-4 space-y-2">
+              <div>
+                <a href="https://sufyantsaury753-beep.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 inline-flex items-center gap-1 transition-colors">
+                  <span>Peta Kependudukan 38 Provinsi Indonesia</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" aria-hidden="true"></i>
+                </a>
+                <p class="text-[11px] font-medium text-neutral-400 mt-0.5">National Spatial Portal · 2026</p>
+              </div>
+
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                Portal spasial nasional untuk visualisasi kependudukan, IPM, kemiskinan, dan komposisi demografi 38 provinsi Indonesia lengkap dengan fitur komparasi dan ekspor tabel.
+              </p>
+
+              <ul class="space-y-1 text-[11px] text-neutral-600 pt-1">
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Cakupan lengkap 38 provinsi termasuk 4 DOB Papua</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Komparasi antar-provinsi & ekspor CSV/JSON</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Grafik komposisi demografi & statistik interaktif</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <h4 class="font-bold text-slate-900 text-base">Desain Estetik & Tematik</h4>
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Kombinasi palet warna poligon dan UI kontrol yang dirancang bersih, modern, dan informatif.
-          </p>
-        </div>
+
+          <div class="px-4 pb-4 pt-3 border-t border-neutral-100 space-y-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Leaflet.js</span>
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">38 Provinsi</span>
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Tabel & CSV</span>
+            </div>
+            <a href="https://sufyantsaury753-beep.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
+              <span>Buka Peta Nasional</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROYEK 2: Demografi 27 Kabupaten & Kota Jawa Barat -->
+        <article class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between" data-category="demografi">
+          <div>
+            <!-- WADAH FOTO PETA: ganti div placeholder di dalam .photo-slot dengan <img src="assets/foto-jawabarat.jpg" alt="Preview Demografi 27 Kabupaten dan Kota Jawa Barat" width="1600" height="900" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]" /> -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <div class="text-center p-3">
+                <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
+                  <i data-lucide="map-pin" class="w-5 h-5" aria-hidden="true"></i>
+                </div>
+                <span class="text-xs font-bold text-neutral-700 block">27 Kab/Kota Jawa Barat</span>
+              </div>
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md">
+                Jabar 2026
+              </span>
+            </div>
+
+            <div class="p-4 space-y-2">
+              <div>
+                <a href="jawabarat.html" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 inline-flex items-center gap-1 transition-colors">
+                  <span>Demografi 27 Kabupaten & Kota Jawa Barat</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" aria-hidden="true"></i>
+                </a>
+                <p class="text-[11px] font-medium text-neutral-400 mt-0.5">Regional WebGIS Dashboard · 2026</p>
+              </div>
+
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                Dashboard WebGIS wilayah Jawa Barat dengan layer kependudukan, IPM, kemiskinan, struktur sektor ekonomi daerah, serta ekspor poligon transparan.
+              </p>
+
+              <ul class="space-y-1 text-[11px] text-neutral-600 pt-1">
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Batas GeoJSON detail 27 Kabupaten & Kota se-Jabar</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Pencarian instan & grafik sektor ekonomi wilayah</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Unduh potongan poligon PNG transparan resolusi tinggi</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-3 border-t border-neutral-100 space-y-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">27 Kab/Kota</span>
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Chart.js Sektor</span>
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Export PNG</span>
+            </div>
+            <a href="jawabarat.html" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
+              <span>Buka Peta Jawa Barat</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROYEK 3: Mountain Gallery & Interactive Map -->
+        <article class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between" data-category="outdoor">
+          <div>
+            <!-- WADAH FOTO PETA: ganti div placeholder di dalam .photo-slot dengan <img src="assets/foto-mountain.jpg" alt="Preview Mountain Gallery and Interactive Map" width="1600" height="900" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]" /> -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <div class="text-center p-3">
+                <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
+                  <i data-lucide="mountain" class="w-5 h-5" aria-hidden="true"></i>
+                </div>
+                <span class="text-xs font-bold text-neutral-700 block">Mountain Gallery GIS</span>
+              </div>
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md">
+                Outdoor GIS
+              </span>
+            </div>
+
+            <div class="p-4 space-y-2">
+              <div>
+                <a href="https://sufyantsaury753-beep.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 inline-flex items-center gap-1 transition-colors">
+                  <span>Mountain Gallery & Interactive Map</span>
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" aria-hidden="true"></i>
+                </a>
+                <p class="text-[11px] font-medium text-neutral-400 mt-0.5">Interactive Elevation & Trail Map · 2026</p>
+              </div>
+
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                Platform peta digital interaktif yang menyajikan sebaran gunung di Indonesia, data ketinggian (MDPL), jalur pendakian resmi, dan dokumentasi galeri foto.
+              </p>
+
+              <ul class="space-y-1 text-[11px] text-neutral-600 pt-1">
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Pin marker interaktif pada tiap titik koordinat gunung</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Popup galeri dokumentasi & informasi elevasi MDPL</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-800 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <span>Integrasi layer peta dasar OpenStreetMap</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-3 border-t border-neutral-100 space-y-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Outdoor GIS</span>
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Gallery Modal</span>
+              <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Elevation Data</span>
+            </div>
+            <a href="https://sufyantsaury753-beep.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
+              <span>Buka Mountain Gallery</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
 
       </div>
-    </section>
+    </main>
 
-  </main>
+    <!-- ================= 3. FOOTER MINIMALIS ================= -->
+    <footer class="pt-6 border-t border-neutral-200/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-neutral-500">
+      <span>Sufyan Tsaury — WebGIS & Digital Mapping</span>
+      <a href="index.html#projects" class="font-semibold text-neutral-800 hover:text-neutral-950 transition-colors">
+        ← Kembali ke Halaman Utama
+      </a>
+    </footer>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-white text-slate-500 text-xs py-8 border-t border-slate-200/80 text-center">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-2">
-      <strong class="text-slate-900 font-bold block text-sm">Sufyan Tsaury — Web Developer & GIS Specialist</strong>
-      <p>Portofolio Pemetaan Digital & Visualisasi Geospasial · 2026</p>
-    </div>
-  </footer>
+  </div>
 
-  <!-- SCRIPT LOGIKA FILTER -->
+  <!-- ================= 4. FLOATING DOCK BAR MONOKROM ================= -->
+  <nav aria-label="Navigasi Cepat WebGIS" class="dock-safe fixed left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] bg-white/90 backdrop-blur-md border border-neutral-200/90 shadow-lg rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1 sm:gap-2.5">
+    <a href="index.html" aria-label="Beranda Portofolio" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
+      <i data-lucide="home" class="w-4 h-4" aria-hidden="true"></i>
+    </a>
+    <a href="https://sufyantsaury753-beep.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" aria-label="Peta 38 Provinsi Indonesia" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
+      <i data-lucide="globe-2" class="w-4 h-4" aria-hidden="true"></i>
+    </a>
+    <a href="jawabarat.html" aria-label="Peta Demografi Jawa Barat" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
+      <i data-lucide="map-pin" class="w-4 h-4" aria-hidden="true"></i>
+    </a>
+    <a href="https://sufyantsaury753-beep.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" aria-label="Mountain Gallery GIS" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
+      <i data-lucide="mountain" class="w-4 h-4" aria-hidden="true"></i>
+    </a>
+    <div class="w-[1px] h-4 bg-neutral-200" aria-hidden="true"></div>
+    <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via Telegram" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
+      <i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>
+    </a>
+    <a href="mailto:sufyantsaury.id@gmail.com" aria-label="Kirim Email" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
+      <i data-lucide="mail" class="w-4 h-4" aria-hidden="true"></i>
+    </a>
+  </nav>
+
+  <!-- ==================== SCRIPT FILTER & KANVAS TITIK-TITIK MONOKROM ==================== -->
   <script>
-    // Inisialisasi ikon Lucide
     lucide.createIcons();
 
-    // Fungsi Filter Proyek
-    function filterProjects(category, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('bg-primary-600', 'text-white');
-        b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+    function filterProjects(category, activeBtn) {
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        const isSelected = btn === activeBtn;
+        btn.setAttribute('aria-pressed', String(isSelected));
+        btn.classList.toggle('bg-neutral-950', isSelected);
+        btn.classList.toggle('text-white', isSelected);
+        btn.classList.toggle('border-neutral-950', isSelected);
+        btn.classList.toggle('bg-white', !isSelected);
+        btn.classList.toggle('hover:bg-neutral-100', !isSelected);
+        btn.classList.toggle('text-neutral-600', !isSelected);
+        btn.classList.toggle('border-neutral-200', !isSelected);
       });
 
-      btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-      btn.classList.add('bg-primary-600', 'text-white');
-
-      const cards = document.querySelectorAll('.project-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+      document.querySelectorAll('.project-card').forEach((card) => {
+        const matches = category === 'all' || card.getAttribute('data-category') === category;
+        card.hidden = !matches;
       });
     }
+
+    // Kanvas titik-titik bergerak monokrom di bagian atas
+    (function initHeroDots() {
+      const canvas = document.getElementById('heroDotsCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let width = 0, height = 0, lastWidth = 0;
+      let dots = [];
+      let rafId = null;
+
+      function setup() {
+        const parent = canvas.parentElement;
+        const w = parent.clientWidth;
+        const h = parent.clientHeight;
+        if (!w || !h) return;
+
+        if (w === lastWidth && dots.length) return;
+        lastWidth = w;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = w;
+        height = h;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const gap = w < 640 ? 22 : 24;
+        dots = [];
+        for (let x = gap / 2; x < width; x += gap) {
+          for (let y = gap / 2; y < height; y += gap) {
+            dots.push({
+              x: x,
+              y: y,
+              baseAlpha: Math.random() * 0.16 + 0.05,
+              phase: Math.random() * Math.PI * 2,
+              speed: 0.015 + Math.random() * 0.02
+            });
+          }
+        }
+        if (reduceMotion) render(false);
+      }
+
+      function render(animate) {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < dots.length; i++) {
+          const d = dots[i];
+          if (animate) d.phase += d.speed;
+
+          const pulse = (Math.sin(d.phase) + 1) / 2;
+          const alpha = d.baseAlpha * (0.55 + 0.65 * pulse);
+          const fadeBottom = Math.max(0, 1 - (d.y / height) * 1.15);
+
+          ctx.fillStyle = `rgba(23, 23, 23, ${alpha * fadeBottom * 1.35})`;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function loop() {
+        render(true);
+        rafId = requestAnimationFrame(loop);
+      }
+
+      function start() { if (!reduceMotion && rafId === null) loop(); }
+      function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setup, 150);
+      });
+
+      setup();
+      start();
+    })();
   </script>
 </body>
 </html>
