@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portofolio Sufyan Tsaury — Web Developer & Digital Specialist. Next.js, React, Supabase, PWA, WebGIS, dan Naskah Akademik." />
+  <meta name="description" content="Portfolio of Sufyan Tsaury — Web Developer & Digital Specialist. Next.js, React, Supabase, PWA, WebGIS, and Academic Typesetting." />
   <meta name="author" content="Sufyan Tsaury" />
   <title>Sufyan Tsaury — Web Developer & Digital Specialist</title>
   
@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -43,7 +42,7 @@
     h1, h2, h3, h4, p, li { overflow-wrap: anywhere; }
     [hidden] { display: none !important; }
 
-    /* Brand Pill Skill (Monokrom Bersih + Logo Aplikasi Asli) */
+    /* Brand Pill Skill (Clean Monochrome + Authentic App Logos) */
     .brand-pill {
       display: inline-flex;
       align-items: center;
@@ -66,10 +65,10 @@
       box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.06);
     }
 
-    /* Dock aman untuk HP dengan notch / gesture bar */
+    /* Safe Dock padding for mobile gesture navigation */
     .dock-safe { bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
 
-    /* Timeline Garis Vertikal */
+    /* Vertical Timeline Connector */
     .timeline-item { position: relative; }
     .timeline-dot::after {
       content: '';
@@ -84,7 +83,7 @@
       display: none;
     }
 
-    /* Kartu Proyek Kompak Monokrom */
+    /* Compact Project Cards */
     .project-card {
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
@@ -94,7 +93,7 @@
       box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.07), 0 6px 10px -6px rgba(0, 0, 0, 0.04);
     }
 
-    /* Wadah Foto Mockup Monokrom */
+    /* Monochrome Mockup Frame */
     .photo-slot {
       background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
     }
@@ -112,7 +111,7 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* Hormati preferensi pengguna yang mematikan animasi */
+    /* Respect reduced-motion preferences */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -120,16 +119,16 @@
 </head>
 <body class="bg-[#fafafa] text-neutral-900 font-sans antialiased min-h-screen py-10 sm:py-14 lg:py-20 px-4 sm:px-8 relative pb-32 overflow-x-hidden">
 
-  <!-- ==================== KANVAS TITIK-TITIK BERGERAK MONOKROM DI ATAS ==================== -->
+  <!-- ==================== ANIMATED CANVAS DOTS BACKGROUND ==================== -->
   <div class="absolute inset-x-0 top-0 h-[440px] overflow-hidden pointer-events-none z-0">
     <canvas id="heroDotsCanvas" class="w-full h-full opacity-75"></canvas>
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#fafafa]"></div>
   </div>
 
-  <!-- WRAPPER UTAMA -->
+  <!-- MAIN WRAPPER -->
   <main class="w-full max-w-2xl lg:max-w-3xl mx-auto space-y-10 sm:space-y-12 lg:space-y-14 relative z-10">
 
-    <!-- ================= 1. HERO HEADER (TANPA BADGE JUARA DI ATAS) ================= -->
+    <!-- ================= 1. HERO HEADER ================= -->
     <header class="pt-1">
       <div class="flex items-start justify-between gap-4 sm:gap-6">
         <div class="space-y-2 flex-1 min-w-0">
@@ -150,11 +149,11 @@
           </div>
         </div>
 
-        <!-- Avatar Profil Bulat -->
+        <!-- Circular Portrait Avatar -->
         <div class="relative w-16 h-16 min-[400px]:w-20 min-[400px]:h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-2 border-white shadow-md bg-neutral-950 flex items-center justify-center flex-shrink-0">
           <img 
             src="aset/foto-profil.jpg" 
-            alt="Foto profil Sufyan Tsaury" 
+            alt="Profile photo of Sufyan Tsaury" 
             fetchpriority="high"
             width="112"
             height="112"
@@ -166,11 +165,11 @@
       </div>
     </header>
 
-    <!-- ================= 2. ABOUT (DESKRIPSI UMUM) ================= -->
+    <!-- ================= 2. ABOUT ================= -->
     <section id="about" class="space-y-3">
       <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">About</h2>
       <p class="text-neutral-600 text-sm sm:text-base leading-relaxed text-pretty">
-        Menggabungkan latar belakang teknis jaringan dan pengembangan aplikasi web modern (Next.js, React, Supabase) dengan ketelitian penyusunan naskah akademik. Fokus membangun sistem informasi web terintegrasi, aplikasi utilitas berbasis PWA yang cepat dan aman di sisi klien, pemetaan digital WebGIS interaktif, serta penataan dokumen dan buku ajar terstruktur.
+        Combining a strong technical background in computer networking and modern web development (Next.js, React, Supabase) with meticulous precision in academic publishing. Dedicated to building integrated information systems, ultra-fast privacy-first Progressive Web Apps (PWA), interactive WebGIS mapping platforms, and structured academic documentation.
       </p>
     </section>
 
@@ -188,13 +187,13 @@
           <div class="flex-1 space-y-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
               <h3 class="font-bold text-sm text-neutral-900">Freelance Web Developer</h3>
-              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2024 - Present</span>
+              <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2025 - Present</span>
             </div>
             <p class="text-xs text-neutral-500 font-medium">Fullstack Web & Client-Side Solutions · Remote</p>
             <ul class="text-xs text-neutral-600 list-disc list-outside pl-4 space-y-1.5 pt-1.5 leading-relaxed">
-              <li>Merancang dan mendeploy aplikasi web modern berkinerja tinggi menggunakan Next.js 15, React 19, Supabase, dan Tailwind CSS.</li>
-              <li>Membangun Progressive Web App (PWA) <strong>iLoveQyu</strong> dengan arsitektur <em>100% Client-Side</em> tanpa server pihak ketiga.</li>
-              <li>Mengembangkan portal peta digital WebGIS interaktif berbasis Leaflet.js dan format GeoJSON demografi spasial.</li>
+              <li>Architected and deployed high-performance modern web applications using Next.js 15, React 19, Supabase, and Tailwind CSS.</li>
+              <li>Built the <strong>iLoveQyu</strong> Progressive Web App (PWA) with a <em>100% Client-Side</em> zero-server architecture ensuring absolute user privacy.</li>
+              <li>Engineered interactive WebGIS digital map portals leveraging Leaflet.js and spatial demographic GeoJSON datasets.</li>
             </ul>
           </div>
         </div>
@@ -209,10 +208,10 @@
               <h3 class="font-bold text-sm text-neutral-900">Web Administrator & Lead Developer</h3>
               <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2025 - Present</span>
             </div>
-            <p class="text-xs text-neutral-500 font-medium">Portal Kelas HK A UIN Siber Syekh Nurjati Cirebon</p>
+            <p class="text-xs text-neutral-500 font-medium">Class HK A Portal · UIN Siber Syekh Nurjati Cirebon</p>
             <ul class="text-xs text-neutral-600 list-disc list-outside pl-4 space-y-1.5 pt-1.5 leading-relaxed">
-              <li>Membangun portal informasi perkuliahan terpusat dengan fitur presensi digital realtime dan jadwal kuliah dinamis.</li>
-              <li>Mengelola repositori berkas dan materi perkuliahan 11 mata kuliah dengan integrasi Supabase Database.</li>
+              <li>Developed a centralized academic portal featuring real-time digital attendance tracking and dynamic lecture schedules.</li>
+              <li>Organized and maintained digital course material repositories across 11 subjects powered by Supabase.</li>
             </ul>
           </div>
         </div>
@@ -224,13 +223,13 @@
           </div>
           <div class="flex-1 space-y-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
-              <h3 class="font-bold text-sm text-neutral-900">Academic Typesetting & Naskah Specialist</h3>
+              <h3 class="font-bold text-sm text-neutral-900">Academic Typesetting & Manuscript Specialist</h3>
               <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2024 - Present</span>
             </div>
-            <p class="text-xs text-neutral-500 font-medium">Penyusunan Modul, Buku Ajar & Format Ilmiah</p>
+            <p class="text-xs text-neutral-500 font-medium">Course Modules, Textbooks & Academic Publishing</p>
             <ul class="text-xs text-neutral-600 list-disc list-outside pl-4 space-y-1.5 pt-1.5 leading-relaxed">
-              <li>Penyusunan dan perapian naskah buku ajar terstruktur (Buku Manajemen Pendidikan) siap cetak dan siap ajar.</li>
-              <li>Penataan dokumen formal akademik, sitasi, dan daftar isi otomatis sesuai gaya selingkung perguruan tinggi.</li>
+              <li>Formatted, typeset, and structured academic textbooks (including <em>Educational Management</em>) for print and classroom delivery.</li>
+              <li>Standardized academic citations, formal documentation layouts, and automated tables of contents following university guidelines.</li>
             </ul>
           </div>
         </div>
@@ -238,7 +237,7 @@
       </div>
     </section>
 
-    <!-- ================= 4. EDUCATION (LOGO BULAT PROPORSIONAL) ================= -->
+    <!-- ================= 4. EDUCATION ================= -->
     <section id="education" class="space-y-4">
       <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Education</h2>
 
@@ -254,7 +253,7 @@
               <h3 class="font-bold text-sm text-neutral-900">UIN Siber Syekh Nurjati Cirebon</h3>
               <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2025 - Present</span>
             </div>
-            <p class="text-xs text-neutral-500 font-medium">S1 Hukum Keluarga (Ahwal Syakhshiyyah)</p>
+            <p class="text-xs text-neutral-500 font-medium">Bachelor of Islamic Family Law (Ahwal Syakhshiyyah)</p>
           </div>
         </div>
 
@@ -268,14 +267,14 @@
               <h3 class="font-bold text-sm text-neutral-900">SMK Negeri 7 Garut</h3>
               <span class="text-xs text-neutral-400 font-medium whitespace-nowrap">2022 - 2025</span>
             </div>
-            <p class="text-xs text-neutral-500 font-medium">Teknik Komputer dan Jaringan (TKJ)</p>
+            <p class="text-xs text-neutral-500 font-medium">Computer and Network Engineering (TKJ)</p>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ================= 5. SKILLS (LOGO ASLI APLIKASI) ================= -->
+    <!-- ================= 5. SKILLS ================= -->
     <section id="skills" class="space-y-3">
       <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Skills</h2>
       
@@ -319,7 +318,7 @@
 
         <!-- PWA -->
         <span class="brand-pill">
-          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 512 512" fill="#5A0FC8"><path d="M472.9 268.4c-4.4-1.7-9.3-2.6-14.4-2.6-13.6 0-25.4 6.7-32.6 17.1l-60.5 88.5h-45.7l50.6-73.6c7.7-11.2 12.3-24.8 12.3-39.5 0-38.3-31.1-69.4-69.4-69.4H192v256h48v-85.3h73.2l61.6 85.3h58.3l-59.2-82.1c8.8-5.3 16.2-12.8 21.6-21.7l52.6-77.1c8.4-12.2 22.8-19.8 38.6-19.8 4.7 0 9.2.7 13.4 2.1l11.9-20.9c-12.7-4.5-26.6-7-41.1-7zM240 234.7h73.2c11.8 0 21.3 9.6 21.3 21.3s-9.6 21.3-21.3 21.3H240v-42.6zM74.7 187.7H26.7l96 256h48l48-128h-48l-24 64-76-192z"/></svg>
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 512 512" fill="#5A0FC8"><path d="M472.9 268.4c-4.4-1.7-9.3-2.6-14.4-2.6-13.6 0-25.4 6.7-32.6 17.1l-60.5 88.5h-45.7l50.6-73.6c7.7-11.2 12.3-24.8 12.3-39.5 0-38.3-31.1-69.4-69.4H192v256h48v-85.3h73.2l61.6 85.3h58.3l-59.2-82.1c8.8-5.3 16.2-12.8 21.6-21.7l52.6-77.1c8.4-12.2 22.8-19.8 38.6-19.8 4.7 0 9.2.7 13.4 2.1l11.9-20.9c-12.7-4.5-26.6-7-41.1-7zM240 234.7h73.2c11.8 0 21.3 9.6 21.3 21.3s-9.6 21.3-21.3 21.3H240v-42.6zM74.7 187.7H26.7l96 256h48l48-128h-48l-24 64-76-192z"/></svg>
           <span>PWA</span>
         </span>
 
@@ -332,7 +331,7 @@
         <!-- GeoJSON -->
         <span class="brand-pill">
           <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-          <span>GeoJSON Spasial</span>
+          <span>Spatial GeoJSON</span>
         </span>
 
         <!-- Python -->
@@ -353,10 +352,10 @@
           <span>Vercel</span>
         </span>
 
-        <!-- Networking TKJ -->
+        <!-- Networking & TKJ -->
         <span class="brand-pill">
           <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
-          <span>Jaringan & TKJ</span>
+          <span>Networking & TKJ</span>
         </span>
 
         <!-- Microsoft Word -->
@@ -380,14 +379,14 @@
       </div>
     </section>
 
-    <!-- ================= 6. COMPETITIONS (TANPA KATA HACKATHON, MONOKROM) ================= -->
+    <!-- ================= 6. COMPETITIONS ================= -->
     <section id="competitions" class="space-y-4">
       <div class="space-y-1">
         <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Competitions</h2>
-        <p class="text-xs text-neutral-500">Pencapaian dalam ajang kompetisi pengembangan web nasional.</p>
+        <p class="text-xs text-neutral-500">Milestones in M-One web development and coding competitions.</p>
       </div>
 
-      <!-- Card Juara 1 M-One Telkomsel (Monokrom) -->
+      <!-- Card Juara 1 M-One Telkomsel (Monochrome) -->
       <div class="bg-white p-5 rounded-2xl border border-neutral-200/90 shadow-2xs">
         <div class="flex items-start gap-4">
           <div class="w-11 h-11 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-800 flex items-center justify-center flex-shrink-0">
@@ -396,15 +395,15 @@
           <div class="flex-1 space-y-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-3">
               <h3 class="font-extrabold text-sm sm:text-base text-neutral-950">
-                Juara 1 — M-One Telkomsel Coding Competition 2026
+                1st Place — M-One Telkomsel Coding Competition 2026
               </h3>
               <span class="self-start text-[11px] text-white font-bold bg-neutral-950 px-2.5 py-0.5 rounded-full whitespace-nowrap">
                 1st Place
               </span>
             </div>
-            <p class="text-xs font-medium text-neutral-500">Karya: TobiQuest · M-One Solution & Telkomsel</p>
+            <p class="text-xs font-medium text-neutral-500">Project: TobiQuest · M-One Solution & Telkomsel</p>
             <p class="text-xs text-neutral-600 leading-relaxed pt-1">
-              Meraih peringkat pertama melalui pengembangan platform edukasi interaktif siswa SD dengan fitur <em>Telkomsel Lite Mode (&lt;500 KB)</em> untuk daerah 3T serta panduan suara <em>AI Socratic Mentor</em>.
+              Awarded first place for engineering an interactive web-based learning platform for elementary school students featuring <em>Telkomsel Lite Mode (&lt;500 KB)</em> for remote 3T regions and real-time <em>Web Speech AI Mentor</em> guidance.
             </p>
             <div class="pt-3 flex flex-wrap items-center gap-2">
               <a href="https://tobiquest.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
@@ -413,7 +412,7 @@
               </a>
               <button type="button" onclick="openAwardModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-800 font-bold text-xs transition-colors">
                 <i data-lucide="image" class="w-3.5 h-3.5 text-neutral-600"></i>
-                <span>Lihat Poster Pengumuman</span>
+                <span>View Award Poster</span>
               </button>
             </div>
           </div>
@@ -421,23 +420,23 @@
       </div>
     </section>
 
-    <!-- ================= 7. SELECTED PROJECTS (KOMPAK + WADAH FOTO MONOKROM) ================= -->
+    <!-- ================= 7. SELECTED PROJECTS ================= -->
     <section id="projects" class="space-y-4">
       <div class="space-y-1">
         <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Selected Projects</h2>
-        <p class="text-xs text-neutral-500">Koleksi karya aplikasi web fungsional, utilitas dokumen, dan pemetaan.</p>
+        <p class="text-xs text-neutral-500">A curated collection of web applications, document tools, and geospatial mapping platforms.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-        <!-- PROYEK 1: TobiQuest -->
+        <!-- PROJECT 1: TobiQuest -->
         <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
           <div>
-            <!-- FOTO PROYEK: TobiQuest Showcase Poster -->
+            <!-- PROJECT MOCKUP: TobiQuest Showcase Poster -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
               <img
                 src="aset/poster-tobiquest.jpg"
-                alt="Showcase poster platform pembelajaran interaktif TobiQuest"
+                alt="Showcase poster of TobiQuest interactive learning platform"
                 width="1920"
                 height="1080"
                 loading="lazy"
@@ -457,7 +456,7 @@
               </div>
               <p class="text-[11px] font-medium text-neutral-400">M-One Telkomsel Coding Competition · 2026</p>
               <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
-                Platform pembelajaran interaktif siswa SD dengan panduan suara Web Speech AI Mentor, 5 stasiun lab sains virtual, dan mode hemat kuota daerah 3T.
+                Interactive elementary learning platform featuring Web Speech AI Mentor voice guidance, 5 virtual science lab stations, and data-saver mode for remote regions.
               </p>
             </div>
           </div>
@@ -470,14 +469,14 @@
           </div>
         </div>
 
-        <!-- PROYEK 2: Portal Kelas HK A -->
+        <!-- PROJECT 2: Class HK A Portal -->
         <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
           <div>
-            <!-- FOTO PROYEK: Web Kelas HK A -->
+            <!-- PROJECT MOCKUP: Web Kelas HK A -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
               <img
                 src="aset/foto-kelashka.jpg"
-                alt="Preview Web Kelas HK A 2025 UIN SSC"
+                alt="Preview of Class HK A 2025 Portal UIN SSC"
                 width="1879"
                 height="1027"
                 loading="lazy"
@@ -497,7 +496,7 @@
               </div>
               <p class="text-[11px] font-medium text-neutral-400">Academic Portal · UIN SSC 2025</p>
               <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
-                Platform sistem informasi akademik perkuliahan terpadu mahasiswa UIN SSC dengan fitur presensi digital realtime dan repositori berkas 11 mata kuliah.
+                Integrated academic portal for UIN SSC students featuring real-time digital attendance tracking and course material repositories across 11 subjects.
               </p>
             </div>
           </div>
@@ -509,14 +508,14 @@
           </div>
         </div>
 
-        <!-- PROYEK 3: iLoveQyu PWA -->
+        <!-- PROJECT 3: iLoveQyu PWA -->
         <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
           <div>
-            <!-- FOTO PROYEK: iLoveQyu PWA -->
+            <!-- PROJECT MOCKUP: iLoveQyu PWA -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
               <img
                 src="aset/foto-iloveqyu.jpg"
-                alt="Preview aplikasi utilitas PDF iLoveQyu PWA"
+                alt="Preview of iLoveQyu PWA document utility app"
                 width="1915"
                 height="1000"
                 loading="lazy"
@@ -536,7 +535,7 @@
               </div>
               <p class="text-[11px] font-medium text-neutral-400">Privacy-First PDF Utility · 2026</p>
               <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
-                Aplikasi utilitas PDF berbasis Progressive Web App (100% Client-Side) dengan kompresi berkas CASN/BUMN, tanda tangan basah digital, dan penomoran skripsi.
+                Progressive Web App (100% Client-Side) for fast, secure PDF processing including civil service CASN/BUMN file compression, digital wet signature, and thesis page numbering.
               </p>
             </div>
           </div>
@@ -548,35 +547,39 @@
           </div>
         </div>
 
-        <!-- PROYEK 4: WebGIS & Demografi -->
+        <!-- PROJECT 4: WebGIS & Demography -->
         <div class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between">
-  <div>
-    <!-- Wadah tetap terkunci di rasio 16:9 -->
-    <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
-      <img
-        src="aset/foto-webgis.jpg"
-        alt="Katalog WebGIS"
-        width="1920"
-        height="1080"
-        loading="lazy"
-        class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
-      />
-      <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
-        WebGIS
-      </span>
-    </div>
+          <div>
+            <!-- PROJECT MOCKUP: WebGIS Catalog (Matches 16:9 standard with fallback) -->
+            <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
+              <img
+                src="aset/foto-webgis.jpg"
+                alt="WebGIS and Digital Mapping Catalog"
+                loading="lazy"
+                class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+                onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+              />
+              <div hidden class="text-center p-3">
+                <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
+                  <i data-lucide="map" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xs font-bold text-neutral-700 block">WebGIS Catalog</span>
+              </div>
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
+                WebGIS
+              </span>
+            </div>
 
-    <div class="p-4 space-y-1.5">
-      <!-- judul & deskripsi tetap sama -->
+            <div class="p-4 space-y-1.5">
               <div class="flex items-center justify-between">
                 <a href="webgis.html" class="font-extrabold text-sm text-neutral-950 hover:text-neutral-600 flex items-center gap-1 transition-colors">
-                  <span>Katalog WebGIS</span>
+                  <span>WebGIS Catalog</span>
                   <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neutral-400"></i>
                 </a>
               </div>
               <p class="text-[11px] font-medium text-neutral-400">Geospatial Demography · 2026</p>
               <p class="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
-                Pusat proyek peta digital interaktif web berbasis Leaflet.js yang menyajikan visualisasi data demografi Indonesia dan batas wilayah GeoJSON Jawa Barat.
+                Interactive digital map platform built with Leaflet.js, featuring demographic data visualizations across Indonesia and regional GeoJSON boundaries for West Java.
               </p>
             </div>
           </div>
@@ -584,14 +587,14 @@
           <div class="px-4 pb-4 pt-2 flex flex-wrap gap-1.5 border-t border-neutral-100">
             <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Leaflet.js</span>
             <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">GeoJSON</span>
-            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Spasial</span>
+            <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Spatial Data</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ================= 8. SELECTED CREDENTIALS (MURNI MONOKROM ALA WAKHID) ================= -->
+    <!-- ================= 8. SELECTED CREDENTIALS ================= -->
     <section id="credentials" class="space-y-4">
       <h2 class="text-xl font-extrabold tracking-tight text-neutral-950">Selected Credentials</h2>
 
@@ -603,7 +606,7 @@
             <i data-lucide="award" class="w-4 h-4"></i>
           </div>
           <div class="flex-1 min-w-0">
-            <h4 class="font-bold text-xs sm:text-sm text-neutral-950">Juara 1 M-One Telkomsel Coding Competition 2026</h4>
+            <h4 class="font-bold text-xs sm:text-sm text-neutral-950">1st Place — M-One Telkomsel Coding Competition 2026</h4>
             <p class="text-xs text-neutral-500">M-One Solution & Telkomsel · 2026</p>
           </div>
         </div>
@@ -611,7 +614,7 @@
       </div>
     </section>
 
-    <!-- ================= 9. CONTACT CARD (MONOKROM) ================= -->
+    <!-- ================= 9. CONTACT CARD ================= -->
     <section id="contact" class="pt-2">
       <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-10 text-center space-y-4 shadow-2xs">
         <div class="inline-flex items-center px-3.5 py-1 rounded-full bg-neutral-950 text-white text-[11px] font-bold tracking-wider uppercase">
@@ -623,7 +626,7 @@
         </h2>
         
         <p class="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
-          Punya ide proyek website, WebGIS, atau kolaborasi karya digital? Jangan ragu untuk menghubungi saya melalui Telegram atau email.
+          Have a project idea, WebGIS concept, or digital collaboration in mind? Feel free to reach out via Telegram or email.
         </p>
 
         <div class="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3">
@@ -633,7 +636,7 @@
           </a>
           <button type="button" onclick="copyEmail()" class="px-5 py-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-xs font-bold transition-all flex items-center justify-center gap-2 border border-neutral-200">
             <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-            <span id="copyBtnText">Salin Email</span>
+            <span id="copyBtnText">Copy Email</span>
           </button>
         </div>
       </div>
@@ -641,73 +644,78 @@
 
   </main>
 
-  <!-- ================= 10. FLOATING DOCK BAR MONOKROM ================= -->
-  <nav aria-label="Quick Navigation" class="dock-safe fixed left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] bg-white/90 backdrop-blur-md border border-neutral-200/90 shadow-lg rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-0.5 sm:gap-2.5">
-    <a href="#about" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="About">
-      <i data-lucide="user" class="w-4 h-4"></i>
+  <!-- ================= 10. FLOATING DOCK BAR (MONOCHROME CIRCLES PER USER DESIGN) ================= -->
+  <nav aria-label="Social & Quick Navigation" class="dock-safe fixed left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-neutral-200/90 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] rounded-full p-1.5 sm:p-2 flex items-center gap-1.5 sm:gap-2">
+    <!-- Home -->
+    <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs" title="Home" aria-label="Home">
+      <i data-lucide="home" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
     </a>
-    <a href="#experience" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Experience">
-      <i data-lucide="briefcase" class="w-4 h-4"></i>
+    
+    <!-- Divider -->
+    <div class="w-[1px] h-5 bg-neutral-200 mx-0.5"></div>
+
+    <!-- GitHub -->
+    <a href="https://github.com/sufyan-Tsaury" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs" title="GitHub" aria-label="GitHub">
+      <i data-lucide="github" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
     </a>
-    <a href="#education" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Education">
-      <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+
+    <!-- LinkedIn (Featured prominent circle per user design) -->
+    <a href="https://www.linkedin.com/in/sufyan-tsaury-undefined-b3a451449/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-900 bg-neutral-950 hover:bg-neutral-800 text-white flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-xs" title="LinkedIn" aria-label="LinkedIn">
+      <i data-lucide="linkedin" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
     </a>
-    <a href="#competitions" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Competitions">
-      <i data-lucide="trophy" class="w-4 h-4"></i>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/piantsa?srtk=M2N2bGV4ZXo0MHhl" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs" title="Instagram" aria-label="Instagram">
+      <i data-lucide="instagram" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
     </a>
-    <a href="#projects" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Projects">
-      <i data-lucide="folder-git-2" class="w-4 h-4"></i>
-    </a>
-    <div class="w-[1px] h-4 bg-neutral-200"></div>
-    <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Telegram">
-      <i data-lucide="send" class="w-4 h-4"></i>
-    </a>
-    <a href="mailto:sufyantsaury.id@gmail.com" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all" title="Email">
-      <i data-lucide="mail" class="w-4 h-4"></i>
+
+    <!-- Email -->
+    <a href="mailto:sufyantsaury.id@gmail.com" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs" title="Email" aria-label="Email">
+      <i data-lucide="mail" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
     </a>
   </nav>
 
-  <!-- ==================== NATIVE DIALOG MODAL POSTER JUARA 1 TELKOMSEL ==================== -->
+  <!-- ==================== NATIVE DIALOG MODAL POSTER 1ST PLACE TELKOMSEL ==================== -->
   <dialog id="awardModal" closedby="any" aria-labelledby="awardModalTitle" class="m-auto p-0 rounded-3xl max-w-lg w-[calc(100%-1.5rem)] bg-white text-neutral-900 shadow-2xl border border-neutral-200 overflow-hidden">
     <div class="p-4 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
       <div class="flex items-center gap-2">
         <i data-lucide="trophy" class="w-4 h-4 text-neutral-800"></i>
-        <h3 id="awardModalTitle" class="font-extrabold text-sm text-neutral-950">Juara 1 M-One Telkomsel 2026</h3>
+        <h3 id="awardModalTitle" class="font-extrabold text-sm text-neutral-950">1st Place M-One Telkomsel 2026</h3>
       </div>
       <form method="dialog">
-        <button type="submit" aria-label="Tutup" class="w-8 h-8 rounded-full bg-neutral-200/80 hover:bg-neutral-300 flex items-center justify-center text-neutral-700 transition-colors">
+        <button type="submit" aria-label="Close" class="w-8 h-8 rounded-full bg-neutral-200/80 hover:bg-neutral-300 flex items-center justify-center text-neutral-700 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </form>
     </div>
     <div class="p-3 sm:p-4 max-h-[65vh] sm:max-h-[75vh] overflow-y-auto">
-      <img src="aset/juara-mone-telkomsel.jpg" alt="Pengumuman Juara 1 M-One Telkomsel Coding Competition 2026" fetchpriority="low" loading="lazy" class="w-full rounded-2xl border border-neutral-200" />
+      <img src="aset/juara-mone-telkomsel.jpg" alt="1st Place Award M-One Telkomsel Coding Competition 2026 Announcement" fetchpriority="low" loading="lazy" class="w-full rounded-2xl border border-neutral-200" />
       <div class="mt-4 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200 text-xs text-neutral-600 leading-relaxed">
-        <p class="font-bold text-neutral-950 mb-1">Karya: TobiQuest — Sufyan Tsaury</p>
-        <p>M-One Telkomsel Coding Competition 2026: Platform pembelajaran web inovatif untuk anak SD dengan Telkomsel Lite Mode (&lt;500 KB) dan Web Speech AI Mentor.</p>
+        <p class="font-bold text-neutral-950 mb-1">Project: TobiQuest — Sufyan Tsaury</p>
+        <p>M-One Telkomsel Coding Competition 2026: An innovative web-based learning platform for elementary students featuring Telkomsel Lite Mode (&lt;500 KB) and Web Speech AI Mentor.</p>
       </div>
     </div>
     <div class="p-4 border-t border-neutral-200 flex gap-2">
       <a href="https://tobiquest.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs text-center transition-colors">
-        Buka Live TobiQuest
+        Open Live TobiQuest
       </a>
       <form method="dialog">
         <button type="submit" class="px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs transition-colors">
-          Tutup
+          Close
         </button>
       </form>
     </div>
   </dialog>
 
-  <!-- Toast Notification Salin Email (Monokrom) -->
+  <!-- Toast Notification Copy Email (Monochrome) -->
   <div id="toast" class="fixed top-4 inset-x-4 sm:inset-x-auto sm:right-6 sm:top-6 z-50 flex justify-center sm:justify-end transform -translate-y-16 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="bg-neutral-950 text-white px-4 py-2.5 rounded-xl shadow-lg border border-neutral-800 flex items-center gap-2 text-xs font-semibold">
       <i data-lucide="check" class="w-4 h-4 text-neutral-300"></i>
-      <span>Email berhasil disalin ke clipboard</span>
+      <span>Email copied to clipboard!</span>
     </div>
   </div>
 
-  <!-- ==================== SCRIPT INTERAKTIF & ANIMASI TITIK-TITIK MONOKROM ==================== -->
+  <!-- ==================== SCRIPTS & ANIMATION ==================== -->
   <script>
     lucide.createIcons();
 
@@ -719,7 +727,7 @@
       }
     }
 
-    // Fallback light-dismiss untuk browser yang belum mendukung <dialog closedby="any">
+    // Fallback light-dismiss for older browsers
     if (awardDialog && !('closedBy' in HTMLDialogElement.prototype)) {
       awardDialog.addEventListener('click', (event) => {
         if (event.target !== awardDialog) return;
@@ -735,24 +743,26 @@
       });
     }
 
-    // Salin Email
+    // Copy Email Functionality
     function copyEmail() {
       const email = 'sufyantsaury.id@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         const btn = document.getElementById('copyBtnText');
         const toast = document.getElementById('toast');
         
-        btn.textContent = 'Email Tersalin ✓';
+        btn.textContent = 'Copied to clipboard ✓';
         toast.classList.remove('-translate-y-16', 'opacity-0');
         
         setTimeout(() => {
-          btn.textContent = 'Salin Email';
+          btn.textContent = 'Copy Email';
           toast.classList.add('-translate-y-16', 'opacity-0');
         }, 2200);
       });
     }
 
-  
+    // ========================================================
+    // HEADER ANIMATED DOTS CANVAS (MONOCHROME)
+    // ========================================================
     (function initHeroDots() {
       const canvas = document.getElementById('heroDotsCanvas');
       if (!canvas) return;
@@ -804,7 +814,6 @@
           const alpha = d.baseAlpha * (0.55 + 0.65 * pulse);
           const fadeBottom = Math.max(0, 1 - (d.y / height) * 1.15);
 
-          // Murni monokrom abu-hitam
           ctx.fillStyle = `rgba(23, 23, 23, ${alpha * fadeBottom * 1.35})`;
           ctx.beginPath();
           ctx.arc(d.x, d.y, 1.2, 0, Math.PI * 2);
