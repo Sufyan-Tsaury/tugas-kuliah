@@ -74,7 +74,7 @@
       box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.07), 0 6px 10px -6px rgba(0, 0, 0, 0.04);
     }
 
-    /* Wadah Foto Preview Peta Monokrom */
+    /* Wadah Foto Preview Peta Monokrom (Kunci Rasio 16:9) */
     .photo-slot {
       background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
     }
@@ -186,15 +186,24 @@
         <!-- PROYEK 1: Peta Kependudukan 38 Provinsi Indonesia -->
         <article class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between" data-category="demografi">
           <div>
-            <img src="assets/foto-indonesia.jpg" alt="Preview Peta Kependudukan 38 Provinsi Indonesia" width="1600" height="900" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]" />
+            <!-- WADAH FOTO PETA: Gambar berada di dalam .photo-slot (Rasio 16:9 Proporsional & Terkunci) -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
-              <div class="text-center p-3">
+              <img
+                src="aset/foto-indonesia.jpg"
+                alt="Preview Peta Kependudukan 38 Provinsi Indonesia"
+                width="1672"
+                height="941"
+                loading="lazy"
+                class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+                onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+              />
+              <div hidden class="text-center p-3">
                 <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
                   <i data-lucide="globe-2" class="w-5 h-5" aria-hidden="true"></i>
                 </div>
                 <span class="text-xs font-bold text-neutral-700 block">38 Provinsi Indonesia</span>
               </div>
-              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md">
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
                 Live Interactive
               </span>
             </div>
@@ -235,25 +244,36 @@
               <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">38 Provinsi</span>
               <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Tabel & CSV</span>
             </div>
-            <a href="https://sufyantsaury753-beep.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
+            <a href="https://sufyan-tsaury.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
               <span>Buka Peta Nasional</span>
               <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
             </a>
           </div>
         </article>
 
+      
+
         <!-- PROYEK 3: Mountain Gallery & Interactive Map -->
         <article class="project-card group bg-white border border-neutral-200/90 rounded-2xl overflow-hidden flex flex-col justify-between" data-category="outdoor">
           <div>
-            <img src="assets/foto-mountain.jpg" alt="Preview Mountain Gallery and Interactive Map" width="1600" height="900" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]" /> 
+            <!-- WADAH FOTO PETA: Gambar berada di dalam .photo-slot (Rasio 16:9 Proporsional & Terkunci) -->
             <div class="relative w-full aspect-[16/9] photo-slot border-b border-neutral-200/70 flex items-center justify-center overflow-hidden">
-              <div class="text-center p-3">
+              <img
+                src="aset/foto-mountain.jpg"
+                alt="Preview Mountain Gallery and Interactive Map"
+                width="1672"
+                height="941"
+                loading="lazy"
+                class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+                onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+              />
+              <div hidden class="text-center p-3">
                 <div class="w-10 h-10 rounded-xl bg-white border border-neutral-200 text-neutral-700 flex items-center justify-center mx-auto mb-1.5 shadow-2xs">
                   <i data-lucide="mountain" class="w-5 h-5" aria-hidden="true"></i>
                 </div>
                 <span class="text-xs font-bold text-neutral-700 block">Mountain Gallery GIS</span>
               </div>
-              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md">
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-neutral-950/90 text-white px-2.5 py-0.5 rounded-md backdrop-blur-xs">
                 Outdoor GIS
               </span>
             </div>
@@ -294,7 +314,7 @@
               <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Gallery Modal</span>
               <span class="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">Elevation Data</span>
             </div>
-            <a href="https://sufyantsaury753-beep.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
+            <a href="https://sufyan-tsaury.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition-colors">
               <span>Buka Mountain Gallery</span>
               <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
             </a>
@@ -315,25 +335,38 @@
   </div>
 
   <!-- ================= 4. FLOATING DOCK BAR MONOKROM ================= -->
-  <nav aria-label="Navigasi Cepat WebGIS" class="dock-safe fixed left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] bg-white/90 backdrop-blur-md border border-neutral-200/90 shadow-lg rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1 sm:gap-2.5">
-    <a href="index.html" aria-label="Beranda Portofolio" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
-      <i data-lucide="home" class="w-4 h-4" aria-hidden="true"></i>
+  <nav aria-label="Navigasi Cepat WebGIS" class="dock-safe fixed left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] bg-white/90 backdrop-blur-md border border-neutral-200/90 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] rounded-full p-1.5 sm:p-2 flex items-center gap-1 sm:gap-2">
+    <!-- Home -->
+    <a href="index.html" aria-label="Beranda Portofolio" title="Beranda Portofolio" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs">
+      <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
     </a>
-    <a href="https://sufyantsaury753-beep.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" aria-label="Peta 38 Provinsi Indonesia" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
-      <i data-lucide="globe-2" class="w-4 h-4" aria-hidden="true"></i>
+    <!-- Peta 38 Provinsi -->
+    <a href="https://sufyantsaury753-beep.github.io/indonesia-data/" target="_blank" rel="noopener noreferrer" aria-label="Peta 38 Provinsi Indonesia" title="Peta 38 Provinsi Indonesia" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs">
+      <i data-lucide="globe-2" class="w-4 h-4 sm:w-4.5 sm:h-4.5" aria-hidden="true"></i>
     </a>
-    <a href="jawabarat.html" aria-label="Peta Demografi Jawa Barat" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
-      <i data-lucide="map-pin" class="w-4 h-4" aria-hidden="true"></i>
+    <!-- Peta Jabar -->
+    <a href="jawabarat.html" aria-label="Peta Demografi Jawa Barat" title="Peta Demografi Jawa Barat" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs">
+      <i data-lucide="map-pin" class="w-4 h-4 sm:w-4.5 sm:h-4.5" aria-hidden="true"></i>
     </a>
-    <a href="https://sufyantsaury753-beep.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" aria-label="Mountain Gallery GIS" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
-      <i data-lucide="mountain" class="w-4 h-4" aria-hidden="true"></i>
+    <!-- Mountain Gallery -->
+    <a href="https://sufyantsaury753-beep.github.io/mountain-gallery/" target="_blank" rel="noopener noreferrer" aria-label="Mountain Gallery GIS" title="Mountain Gallery GIS" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs">
+      <i data-lucide="mountain" class="w-4 h-4 sm:w-4.5 sm:h-4.5" aria-hidden="true"></i>
     </a>
-    <div class="w-[1px] h-4 bg-neutral-200" aria-hidden="true"></div>
-    <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via Telegram" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
-      <i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>
+    <!-- Divider -->
+    <div class="w-[1px] h-5 bg-neutral-200 mx-0.5" aria-hidden="true"></div>
+    <!-- Telegram -->
+    <a href="https://t.me/piantsa" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via Telegram" title="Telegram" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs">
+      <i data-lucide="send" class="w-4 h-4 sm:w-4.5 sm:h-4.5" aria-hidden="true"></i>
     </a>
-    <a href="mailto:sufyantsaury.id@gmail.com" aria-label="Kirim Email" class="p-2.5 sm:p-2 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-all">
-      <i data-lucide="mail" class="w-4 h-4" aria-hidden="true"></i>
+    <!-- Email -->
+    <a href="mailto:sufyantsaury.id@gmail.com" aria-label="Kirim Email" title="Email" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-950 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xs">
+      <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
     </a>
   </nav>
 
